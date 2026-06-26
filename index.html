@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amalfi Coast Itinerary · July 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f2eb;
+    --sand: #e8ddd0;
+    --terracotta: #c4674a;
+    --terracotta-light: #d4856a;
+    --sea: #3a7d8c;
+    --sea-light: #5a9dac;
+    --sea-pale: #e8f2f4;
+    --gold: #c9a84c;
+    --text: #2a2220;
+    --text-light: #6b5f58;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Jost', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 32px 16px 48px;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--sand);
+    position: relative;
+  }
+
+  .header-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 6vw, 52px);
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .header-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .header-sub {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: var(--text-light);
+    letter-spacing: 1px;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-naples { background: var(--terracotta); }
+  .dot-sorrento { background: var(--sea); }
+  .dot-island { background: var(--gold); }
+  .dot-coast { background: #7a9e6e; }
+
+  /* Day cards */
+  .days {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .day-card {
+    background: var(--white);
+    border-radius: 2px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    box-shadow: 0 1px 8px rgba(42,34,32,0.06);
+    transition: box-shadow 0.2s;
+  }
+
+  .day-card:hover {
+    box-shadow: 0 4px 20px rgba(42,34,32,0.1);
+  }
+
+  .day-left {
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-right: 1px solid var(--sand);
+  }
+
+  .day-left.naples { background: #fdf0eb; border-right-color: #f0d5c8; }
+  .day-left.sorrento { background: #eaf3f5; border-right-color: #c8dfe4; }
+  .day-left.island { background: #fdf6e3; border-right-color: #ecddb8; }
+  .day-left.coast { background: #eef3eb; border-right-color: #ccddc6; }
+
+  .day-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .naples .day-num { color: var(--terracotta); }
+  .sorrento .day-num { color: var(--sea); }
+  .island .day-num { color: var(--gold); }
+  .coast .day-num { color: #7a9e6e; }
+
+  .day-month {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--text-light);
+    margin-bottom: 8px;
+  }
+
+  .day-weekday {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .location-badge {
+    margin-top: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .naples .location-badge { background: var(--terracotta); color: white; }
+  .sorrento .location-badge { background: var(--sea); color: white; }
+  .island .location-badge { background: var(--gold); color: white; }
+  .coast .location-badge { background: #7a9e6e; color: white; }
+
+  .day-right {
+    padding: 18px 22px;
+  }
+
+  .day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .activities {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .activities li {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-light);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .activities li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--sand);
+    font-weight: 400;
+  }
+
+  .activities li strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Travel indicator */
+  .travel-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: var(--cream);
+    border-radius: 2px;
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  .travel-note .icon {
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Hotel change banner */
+  .hotel-change {
+    background: var(--sea);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+    margin: 4px 0;
+    border-radius: 2px;
+  }
+
+  .hotel-change::before,
+  .hotel-change::after {
+    content: '⟶';
+    margin: 0 10px;
+    opacity: 0.6;
+  }
+
+  /* Note pill */
+  .note-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    padding: 4px 10px;
+    background: #fdf6e3;
+    border: 1px solid #ecddb8;
+    border-radius: 20px;
+    font-size: 11px;
+    color: #8a7040;
+    font-weight: 400;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--sand);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .footer-stat {
+    text-align: center;
+    padding: 14px 20px;
+    background: var(--white);
+    border-radius: 2px;
+    min-width: 110px;
+    box-shadow: 0 1px 6px rgba(42,34,32,0.05);
+  }
+
+  .footer-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--terracotta);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .footer-stat-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 400;
+  }
+
+  @media (max-width: 480px) {
+    .day-card { grid-template-columns: 72px 1fr; }
+    .day-num { font-size: 28px; }
+    .day-right { padding: 14px 16px; }
+    .day-title { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="header-eyebrow">Two nights · One hotel change · July 2026</div>
+    <h1 class="header-title">Naples & the <em>Amalfi Coast</em></h1>
+    <div class="header-sub">5.5 days · Naples → Sorrento · Capri · Positano · Procida</div>
+  </header>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot dot-naples"></div>Naples</div>
+    <div class="legend-item"><div class="legend-dot dot-sorrento"></div>Sorrento</div>
+    <div class="legend-item"><div class="legend-dot dot-island"></div>Island Day</div>
+    <div class="legend-item"><div class="legend-dot dot-coast"></div>Coast Day</div>
+  </div>
+
+  <div class="days">
+
+    <!-- July 3 -->
+    <div class="day-card">
+      <div class="day-left naples">
+        <div class="day-num">3</div>
+        <div class="day-month">July</div>
+        <div class="day-weekday">Friday</div>
+        <div class="location-badge">Naples</div>
+      </div>
+      <div class="day-right">
+        <div class="day-title">Arrive & Decompress</div>
+        <ul class="activities">
+          <li>Land morning, check into hotel, rest</li>
+          <li>Afternoon stroll through <strong>Spaccanapoli</strong></li>
+          <li>First Neapolitan espresso & sfogliatella</li>
+          <li>Dinner at a historic pizzeria — <strong>Sorbillo</strong> or Di Matteo</li>
+          <li>Early night — don't over-plan this day</li>
+        </ul>
+        <div class="travel-note"><span class="icon">✈️</span> Arrive Naples International (NAP) · Transfer to hotel</div>
+      </div>
+    </div>
+
+    <!-- July 4 -->
+    <div class="day-card">
+      <div class="day-left island">
+        <div class="day-num">4</div>
+        <div class="day-month">July</div>
+        <div class="day-weekday">Saturday</div>
+        <div class="location-badge">Procida</div>
+      </div>
+      <div class="day-right">
+        <div class="day-title">Procida Day Trip</div>
+        <ul class="activities">
+          <li>Morning hydrofoil from <strong>Molo Beverello</strong> → Procida (~40 min)</li>
+          <li>Wander the pastel fishing village of <strong>Marina Corricella</strong> — impossibly photogenic</li>
+          <li>Walk up to <strong>Terra Murata</strong> — the medieval hilltop for sweeping views</li>
+          <li>Long seafood lunch at a harbour-side restaurant</li>
+          <li>Afternoon swim at <strong>Chiaiolella beach</strong> — calm, clear water</li>
+          <li>Hydrofoil back to Naples early evening</li>
+          <li>Easy dinner near the hotel — rest up</li>
+        </ul>
+        <div class="note-pill">🚢 Only 40 min each way — much less time on water than Ischia</div>
+      </div>
+    </div>
+
+    <!-- Hotel change -->
+    <div class="hotel-change">Hotel Change · Naples → Sorrento</div>
+
+    <!-- July 5 -->
+    <div class="day-card">
+      <div class="day-left sorrento">
+        <div class="day-num">5</div>
+        <div class="day-month">July</div>
+        <div class="day-weekday">Sunday</div>
+        <div class="location-badge">Sorrento</div>
+      </div>
+      <div class="day-right">
+        <div class="day-title">Arrive Sorrento · Settle In</div>
+        <ul class="activities">
+          <li><strong>Circumvesuviana train</strong> Naples → Sorrento (~70 min, easy)</li>
+          <li>Check in, lunch with a view of the Bay of Naples</li>
+          <li>Afternoon walk along the cliff-top path</li>
+          <li>Explore the flat historic centre — shops, ceramics, limoncello</li>
+          <li>Sunset aperitivo, relaxed dinner in town</li>
+        </ul>
+        <div class="travel-note"><span class="icon">🚂</span> Circumvesuviana from Napoli Centrale · No ferry needed today</div>
+      </div>
+    </div>
+
+    <!-- July 6 -->
+    <div class="day-card">
+      <div class="day-left island">
+        <div class="day-num">6</div>
+        <div class="day-month">July</div>
+        <div class="day-weekday">Monday</div>
+        <div class="location-badge">Capri</div>
+      </div>
+      <div class="day-right">
+        <div class="day-title">Capri Day Trip</div>
+        <ul class="activities">
+          <li>Ferry Sorrento → Capri <strong>(only 25 min — shortest crossing)</strong></li>
+          <li>Morning in <strong>Anacapri</strong> — quieter, cooler, fewer crowds</li>
+          <li>Chairlift up <strong>Monte Solaro</strong> for the best panoramic views</li>
+          <li>Lunch in Capri town — people-watch at the piazzetta</li>
+          <li>Afternoon at the <strong>Gardens of Augustus</strong> — stunning cliff views</li>
+          <li>Ferry back to Sorrento late afternoon</li>
+        </ul>
+        <div class="note-pill">⚠️ Skip the Blue Grotto boat — not suitable during pregnancy</div>
+      </div>
+    </div>
+
+    <!-- July 7 -->
+    <div class="day-card">
+      <div class="day-left coast">
+        <div class="day-num">7</div>
+        <div class="day-month">July</div>
+        <div class="day-weekday">Tuesday</div>
+        <div class="location-badge">Positano</div>
+      </div>
+      <div class="day-right">
+        <div class="day-title">Full Day in Positano</div>
+        <ul class="activities">
+          <li>Morning ferry Sorrento → Positano (~35–40 min, scenic)</li>
+          <li><strong>Pre-book sunbeds</strong> at a beach club — Lido Blu or La Scogliera</li>
+          <li>Morning swim at <strong>Spiaggia Grande</strong></li>
+          <li>Slow lunch at a restaurant above the beach with views</li>
+          <li>Afternoon wander up through the village, terraces & boutiques</li>
+          <li>Aperitivo watching the golden light hit the buildings</li>
+          <li>Ferry back to Sorrento late afternoon/early evening</li>
+        </ul>
+        <div class="note-pill">📍 7–8 hours gives you the full Positano experience</div>
+      </div>
+    </div>
+
+    <!-- July 8 -->
+    <div class="day-card">
+      <div class="day-left sorrento">
+        <div class="day-num">8</div>
+        <div class="day-month">July</div>
+        <div class="day-weekday">Wednesday</div>
+        <div class="location-badge">Naples</div>
+      </div>
+      <div class="day-right">
+        <div class="day-title">Sorrento Morning · Back to Naples</div>
+        <ul class="activities">
+          <li>Slow morning — final coffee, final views, final limoncello shopping</li>
+          <li>Train back to Naples midday</li>
+          <li>Afternoon: <strong>Naples Archaeological Museum</strong> — world-class Roman artifacts</li>
+          <li>Late afternoon walk to <strong>Castel dell'Ovo</strong> along the waterfront</li>
+          <li>Final dinner in the <strong>Quartieri Spagnoli</strong> — Naples at its best</li>
+        </ul>
+        <div class="travel-note"><span class="icon">🚂</span> Sorrento → Naples Centrale ~70 min · Check into Naples hotel</div>
+      </div>
+    </div>
+
+    <!-- July 9 -->
+    <div class="day-card">
+      <div class="day-left naples">
+        <div class="day-num">9</div>
+        <div class="day-month">July</div>
+        <div class="day-weekday">Thursday</div>
+        <div class="location-badge">Depart</div>
+      </div>
+      <div class="day-right">
+        <div class="day-title">Depart Naples</div>
+        <ul class="activities">
+          <li>Morning departure from <strong>Naples International (NAP)</strong></li>
+          <li>Alibus airport bus from Molo Beverello or Napoli Centrale</li>
+          <li>Allow extra time — Naples airport can be busy in peak July</li>
+        </ul>
+        <div class="travel-note"><span class="icon">✈️</span> Depart NAP · ~20 min from city centre by taxi or Alibus</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer stats -->
+  <div class="footer">
+    <div class="footer-stat">
+      <div class="footer-stat-num">1</div>
+      <div class="footer-stat-label">Hotel Change</div>
+    </div>
+    <div class="footer-stat">
+      <div class="footer-stat-num">2</div>
+      <div class="footer-stat-label">Islands</div>
+    </div>
+    <div class="footer-stat">
+      <div class="footer-stat-num">5.5</div>
+      <div class="footer-stat-label">Full Days</div>
+    </div>
+    <div class="footer-stat">
+      <div class="footer-stat-num">2</div>
+      <div class="footer-stat-label">Naples Nights</div>
+    </div>
+    <div class="footer-stat">
+      <div class="footer-stat-num">3</div>
+      <div class="footer-stat-label">Sorrento Nights</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
