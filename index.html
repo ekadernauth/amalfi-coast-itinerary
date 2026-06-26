@@ -3,343 +3,388 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amalfi Coast Itinerary · July 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Naples & Amalfi Coast · July 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cream: #f7f2eb;
-    --sand: #e8ddd0;
-    --terracotta: #c4674a;
-    --terracotta-light: #d4856a;
-    --sea: #3a7d8c;
-    --sea-light: #5a9dac;
-    --sea-pale: #e8f2f4;
-    --gold: #c9a84c;
-    --text: #2a2220;
-    --text-light: #6b5f58;
-    --white: #ffffff;
-  }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ===== SITE-WIDE NAV ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: #1a1612;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.site-logo {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+.site-logo-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: white;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+.site-logo-em { color: #c4523a; font-style: italic; }
+.site-tabs {
+  display: flex;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.site-tabs::-webkit-scrollbar { display: none; }
+.site-tab {
+  flex-shrink: 0;
+  padding: 0 22px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: rgba(255,255,255,0.45);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.site-tab:hover { color: rgba(255,255,255,0.8); }
+.site-tab.active { color: white; border-bottom-color: #c4523a; }
 
-  body {
-    background: var(--cream);
-    font-family: 'Jost', sans-serif;
-    color: var(--text);
-    min-height: 100vh;
-    padding: 32px 16px 48px;
-  }
+/* ===== PAGES ===== */
+.page { display: none; }
+.page.active { display: block; }
 
-  .page {
-    max-width: 760px;
-    margin: 0 auto;
-  }
+/* ===== ITINERARY PAGE ===== */
+:root {
+  --cream: #f7f2eb;
+  --sand: #e8ddd0;
+  --terracotta: #c4674a;
+  --sea: #3a7d8c;
+  --sea-light: #5a9dac;
+  --gold: #c9a84c;
+  --text: #2a2220;
+  --text-light: #6b5f58;
+  --white: #ffffff;
+}
+#itin-page {
+  background: var(--cream);
+  min-height: calc(100vh - 48px);
+  padding: 36px 16px 56px;
+}
+.itin-inner { max-width: 760px; margin: 0 auto; }
+.itin-header {
+  text-align: center;
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--sand);
+}
+.itin-eyebrow {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 10px;
+}
+.itin-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: clamp(30px, 6vw, 52px);
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.itin-title em { font-style: italic; color: var(--terracotta); }
+.itin-sub {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--text-light);
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+.guide-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: var(--terracotta);
+  color: white;
+  border: none;
+  border-radius: 2px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.guide-cta:hover { background: #b05a40; }
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  font-family: "DM Sans", sans-serif;
+}
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.dot-naples { background: var(--terracotta); }
+.dot-sorrento { background: var(--sea); }
+.dot-island { background: var(--gold); }
+.dot-coast { background: #7a9e6e; }
+.days { display: flex; flex-direction: column; gap: 10px; }
+.day-card {
+  background: var(--white);
+  border-radius: 2px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  box-shadow: 0 1px 8px rgba(42,34,32,0.06);
+  transition: box-shadow 0.2s;
+}
+.day-card:hover { box-shadow: 0 4px 20px rgba(42,34,32,0.1); }
+.day-left {
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-right: 1px solid var(--sand);
+}
+.day-left.naples { background: #fdf0eb; border-right-color: #f0d5c8; }
+.day-left.sorrento { background: #eaf3f5; border-right-color: #c8dfe4; }
+.day-left.island { background: #fdf6e3; border-right-color: #ecddb8; }
+.day-left.coast { background: #eef3eb; border-right-color: #ccddc6; }
+.day-num {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.naples .day-num { color: var(--terracotta); }
+.sorrento .day-num { color: var(--sea); }
+.island .day-num { color: var(--gold); }
+.coast .day-num { color: #7a9e6e; }
+.day-month { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; color: var(--text-light); margin-bottom: 6px; font-family: "DM Sans", sans-serif; }
+.day-weekday { font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--text-light); font-family: "DM Sans", sans-serif; }
+.location-badge { margin-top: 8px; padding: 3px 8px; border-radius: 20px; font-size: 9px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; font-family: "DM Sans", sans-serif; }
+.naples .location-badge { background: var(--terracotta); color: white; }
+.sorrento .location-badge { background: var(--sea); color: white; }
+.island .location-badge { background: var(--gold); color: white; }
+.coast .location-badge { background: #7a9e6e; color: white; }
+.day-right { padding: 18px 22px; }
+.day-title { font-family: "Cormorant Garamond", serif; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.2; }
+.day-links { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.day-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: transparent;
+  font-family: "DM Sans", sans-serif;
+  transition: all 0.15s;
+}
+.dl-naples { color: var(--terracotta); border-color: var(--terracotta); }
+.dl-naples:hover { background: var(--terracotta); color: white; }
+.dl-procida { color: #e07b20; border-color: #e07b20; }
+.dl-procida:hover { background: #e07b20; color: white; }
+.dl-sorrento { color: var(--sea); border-color: var(--sea); }
+.dl-sorrento:hover { background: var(--sea); color: white; }
+.dl-capri { color: #2a5e8c; border-color: #2a5e8c; }
+.dl-capri:hover { background: #2a5e8c; color: white; }
+.dl-positano { color: #a040a0; border-color: #a040a0; }
+.dl-positano:hover { background: #a040a0; color: white; }
+.activities { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.activities li { font-size: 13px; font-weight: 300; color: var(--text-light); padding-left: 14px; position: relative; line-height: 1.5; font-family: "DM Sans", sans-serif; }
+.activities li::before { content: "–"; position: absolute; left: 0; color: var(--sand); font-weight: 400; }
+.activities li strong { color: var(--text); font-weight: 500; }
+.travel-note { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 8px 10px; background: var(--cream); border-radius: 2px; font-size: 11px; color: var(--text-light); font-family: "DM Sans", sans-serif; }
+.travel-note .icon { font-size: 14px; flex-shrink: 0; }
+.hotel-change { background: var(--sea); color: white; text-align: center; padding: 10px 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; font-family: "DM Sans", sans-serif; margin: 4px 0; border-radius: 2px; }
+.hotel-change::before, .hotel-change::after { content: "⟶"; margin: 0 10px; opacity: 0.6; }
+.note-pill { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; padding: 4px 10px; background: #fdf6e3; border: 1px solid #ecddb8; border-radius: 20px; font-size: 11px; color: #8a7040; font-weight: 400; font-family: "DM Sans", sans-serif; }
+.itin-footer { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--sand); display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+.footer-stat { text-align: center; padding: 14px 20px; background: var(--white); border-radius: 2px; min-width: 110px; box-shadow: 0 1px 6px rgba(42,34,32,0.05); }
+.footer-stat-num { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 300; color: var(--terracotta); line-height: 1; margin-bottom: 4px; }
+.footer-stat-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-light); font-weight: 400; font-family: "DM Sans", sans-serif; }
+.big-guide-cta {
+  margin-top: 32px;
+  padding: 28px 24px;
+  background: #1a1612;
+  border-radius: 2px;
+  text-align: center;
+  color: white;
+}
+.big-guide-cta h3 { font-family: "Cormorant Garamond", serif; font-size: 24px; font-weight: 300; margin-bottom: 8px; }
+.big-guide-cta h3 em { color: #c4523a; font-style: italic; }
+.big-guide-cta p { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.6); margin-bottom: 18px; line-height: 1.6; }
+.big-guide-cta-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.dest-cta-btn {
+  padding: 9px 18px;
+  border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: "DM Sans", sans-serif;
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  transition: all 0.15s;
+}
+.dest-cta-btn:hover { color: white; border-color: rgba(255,255,255,0.5); }
+.dest-cta-btn.btn-na { border-color: #c4523a; color: #e08070; }
+.dest-cta-btn.btn-na:hover { background: #c4523a; color: white; }
+.dest-cta-btn.btn-pr { border-color: #e07b20; color: #f0a060; }
+.dest-cta-btn.btn-pr:hover { background: #e07b20; color: white; }
+.dest-cta-btn.btn-so { border-color: #2e7d6b; color: #60b0a0; }
+.dest-cta-btn.btn-so:hover { background: #2e7d6b; color: white; }
+.dest-cta-btn.btn-ca { border-color: #2a5e8c; color: #6090c0; }
+.dest-cta-btn.btn-ca:hover { background: #2a5e8c; color: white; }
+.dest-cta-btn.btn-po { border-color: #a040a0; color: #c070c0; }
+.dest-cta-btn.btn-po:hover { background: #a040a0; color: white; }
 
-  /* Header */
-  .header {
-    text-align: center;
-    margin-bottom: 40px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--sand);
-    position: relative;
-  }
+@media(max-width:480px){
+  .day-card{grid-template-columns:72px 1fr}
+  .day-num{font-size:28px}
+  .day-right{padding:14px 16px}
+  .day-title{font-size:17px}
+  .site-logo{display:none}
+}
 
-  .header-eyebrow {
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--terracotta);
-    margin-bottom: 10px;
-  }
+/* ===== GUIDE PAGE ===== */
 
-  .header-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: clamp(32px, 6vw, 52px);
-    line-height: 1.1;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
 
-  .header-title em {
-    font-style: italic;
-    color: var(--terracotta);
-  }
+:root{--ink:#1a1612;--stone:#4a4038;--warm:#8a7f76;--cream:#f5f0e8;--paper:#faf7f2;--bd:#e2d9ce;--na:#c4523a;--na-p:#fdf0ec;--pr:#e07b20;--pr-p:#fdf3e8;--so:#2e7d6b;--so-p:#eaf4f1;--ca:#2a5e8c;--ca-p:#eaf0f7;--po:#a040a0;--po-p:#f5eaf5;--go:#b8892a;--go-p:#fdf6e3;--gr:#3a7a58;--gr-p:#eaf3ee;--wh:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);font-family:"DM Sans",sans-serif;color:var(--ink);line-height:1.6}
+.tnav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none}
+.tnav::-webkit-scrollbar{display:none}
+.db{flex-shrink:0;padding:14px 18px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;border-right:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.5);font-family:"DM Sans",sans-serif;white-space:nowrap}
+.db:hover{color:#fff;background:rgba(255,255,255,.08)}
+.db.active{color:#fff}
+.db.active.na{background:var(--na)}.db.active.pr{background:var(--pr)}.db.active.so{background:var(--so)}.db.active.ca{background:var(--ca)}.db.active.po{background:var(--po)}
+.dp{display:none;padding:0 0 60px}.dp.active{display:block}
+.ph{padding:28px 24px 22px;border-bottom:1px solid var(--bd)}
+.pe{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.pt{font-family:"Playfair Display",serif;font-size:clamp(24px,5vw,42px);font-weight:700;line-height:1.1;margin-bottom:8px}
+.pt em{font-style:italic;font-weight:400}
+.ps{font-size:13px;font-weight:300;color:var(--warm);max-width:580px;line-height:1.7}
+.DN .pe,.DN .pt em{color:var(--na)}.PR .pe,.PR .pt em{color:var(--pr)}.SO .pe,.SO .pt em{color:var(--so)}.CA .pe,.CA .pt em{color:var(--ca)}.PO .pe,.PO .pt em{color:var(--po)}
+.snav{display:flex;border-bottom:2px solid var(--bd);background:var(--wh);position:sticky;top:47px;z-index:90;overflow-x:auto;scrollbar-width:none}
+.snav::-webkit-scrollbar{display:none}
+.sb{flex-shrink:0;padding:11px 18px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;background:transparent;color:var(--warm);font-family:"DM Sans",sans-serif;white-space:nowrap}
+.sb:hover{color:var(--ink)}
+.DN .sb.active{color:var(--na);border-bottom-color:var(--na)}.PR .sb.active{color:var(--pr);border-bottom-color:var(--pr)}.SO .sb.active{color:var(--so);border-bottom-color:var(--so)}.CA .sb.active{color:var(--ca);border-bottom-color:var(--ca)}.PO .sb.active{color:var(--po);border-bottom-color:var(--po)}
+.cs{display:none;padding:22px 24px;max-width:800px}.cs.active{display:block}
+.ib{padding:13px 17px;border-radius:3px;font-size:13px;font-weight:300;color:var(--stone);line-height:1.7;margin-bottom:18px;border-left:3px solid}
+.DN .ib{background:var(--na-p);border-color:var(--na)}.PR .ib{background:var(--pr-p);border-color:var(--pr)}.SO .ib{background:var(--so-p);border-color:var(--so)}.CA .ib{background:var(--ca-p);border-color:var(--ca)}.PO .ib{background:var(--po-p);border-color:var(--po)}
+.cl{display:flex;align-items:center;gap:10px;margin:20px 0 11px}
+.ct{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;white-space:nowrap;color:var(--warm)}
+.cln{height:1px;background:var(--bd);flex:1}
+.ic{background:var(--wh);border:1px solid var(--bd);border-radius:3px;margin-bottom:9px;overflow:hidden;transition:box-shadow .15s}
+.ic:hover{box-shadow:0 3px 14px rgba(26,22,18,.08)}
+.ii{display:grid;grid-template-columns:48px 1fr}
+.emi{display:flex;align-items:center;justify-content:center;font-size:20px;border-right:1px solid var(--bd);background:var(--cream)}
+.ib2{padding:12px 16px}
+.it2{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.nm{font-family:"Playfair Display",serif;font-size:16px;font-weight:600;color:var(--ink);line-height:1.2}
+.bgs{display:flex;gap:4px;flex-wrap:wrap;flex-shrink:0}
+.bg{padding:2px 8px;border-radius:20px;font-size:9px;font-weight:600;white-space:nowrap}
+.bm{background:var(--na);color:#fff}.bl{background:var(--gr);color:#fff}.bf{background:var(--ink);color:#fff}.bb{background:var(--go);color:#fff}.bp{background:var(--po);color:#fff}
+.lc{font-size:11px;color:var(--warm);margin-bottom:5px}
+.dc{font-size:13px;font-weight:300;color:var(--stone);line-height:1.6;margin-bottom:7px}
+.tp{font-size:11px;color:var(--go);font-weight:500;font-style:italic}
+.ifoot{display:flex;align-items:center;gap:9px;padding:8px 16px;background:var(--cream);border-top:1px solid var(--bd);flex-wrap:wrap}
+.lk{display:inline-flex;align-items:center;font-size:11px;font-weight:600;color:var(--na);text-decoration:none}
+.lk:hover{text-decoration:underline}
+.dt{font-size:11px;color:var(--warm);margin-left:auto}
+.bx{margin:12px 0;padding:14px 17px;border-radius:3px;border:1px solid var(--bd)}
+.bx h4{font-family:"Playfair Display",serif;font-size:15px;font-weight:600;margin-bottom:8px;color:var(--ink)}
+.ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.ul li{font-size:13px;font-weight:300;color:var(--stone);padding-left:16px;position:relative;line-height:1.5}
+.ul li::before{content:"→";position:absolute;left:0;font-weight:600;color:var(--go)}
+.ul li strong{color:var(--ink);font-weight:500}
+.gc{background:var(--go-p);border-color:#e2c878}
+.bc{background:var(--ca-p);border-color:#b4cce0}
+.bc .ul li::before{color:var(--ca)}
+.pc{background:#f5eaf5;border-color:#c8a0d0}
+.pc .ul li::before{color:var(--po)}
+.rc{background:var(--gr-p);border-color:#a0c8b0}
+.rc .ul li::before{color:var(--gr)}
+.sc{background:var(--so-p);border-color:#8dcfc0}
+.sc .ul li::before{color:var(--so)}
+@media(max-width:520px){.ii{grid-template-columns:40px 1fr}.emi{font-size:16px}.ph,.cs{padding:16px 13px}}
 
-  .header-sub {
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    font-size: 13px;
-    color: var(--text-light);
-    letter-spacing: 1px;
-  }
 
-  /* Legend */
-  .legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    margin-bottom: 32px;
-  }
+/* Guide page wrapper */
+#guide-page {
+  background: var(--paper, #faf7f2);
+  min-height: calc(100vh - 48px);
+}
 
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--text-light);
-  }
-
-  .legend-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .dot-naples { background: var(--terracotta); }
-  .dot-sorrento { background: var(--sea); }
-  .dot-island { background: var(--gold); }
-  .dot-coast { background: #7a9e6e; }
-
-  /* Day cards */
-  .days {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .day-card {
-    background: var(--white);
-    border-radius: 2px;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    box-shadow: 0 1px 8px rgba(42,34,32,0.06);
-    transition: box-shadow 0.2s;
-  }
-
-  .day-card:hover {
-    box-shadow: 0 4px 20px rgba(42,34,32,0.1);
-  }
-
-  .day-left {
-    padding: 20px 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-right: 1px solid var(--sand);
-  }
-
-  .day-left.naples { background: #fdf0eb; border-right-color: #f0d5c8; }
-  .day-left.sorrento { background: #eaf3f5; border-right-color: #c8dfe4; }
-  .day-left.island { background: #fdf6e3; border-right-color: #ecddb8; }
-  .day-left.coast { background: #eef3eb; border-right-color: #ccddc6; }
-
-  .day-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px;
-    font-weight: 300;
-    line-height: 1;
-    margin-bottom: 2px;
-  }
-
-  .naples .day-num { color: var(--terracotta); }
-  .sorrento .day-num { color: var(--sea); }
-  .island .day-num { color: var(--gold); }
-  .coast .day-num { color: #7a9e6e; }
-
-  .day-month {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 400;
-    color: var(--text-light);
-    margin-bottom: 8px;
-  }
-
-  .day-weekday {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--text-light);
-  }
-
-  .location-badge {
-    margin-top: 10px;
-    padding: 3px 8px;
-    border-radius: 20px;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .naples .location-badge { background: var(--terracotta); color: white; }
-  .sorrento .location-badge { background: var(--sea); color: white; }
-  .island .location-badge { background: var(--gold); color: white; }
-  .coast .location-badge { background: #7a9e6e; color: white; }
-
-  .day-right {
-    padding: 18px 22px;
-  }
-
-  .day-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-
-  .activities {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .activities li {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--text-light);
-    padding-left: 14px;
-    position: relative;
-    line-height: 1.5;
-  }
-
-  .activities li::before {
-    content: '–';
-    position: absolute;
-    left: 0;
-    color: var(--sand);
-    font-weight: 400;
-  }
-
-  .activities li strong {
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  /* Travel indicator */
-  .travel-note {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-    padding: 8px 10px;
-    background: var(--cream);
-    border-radius: 2px;
-    font-size: 11px;
-    color: var(--text-light);
-    font-weight: 400;
-    letter-spacing: 0.3px;
-  }
-
-  .travel-note .icon {
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  /* Hotel change banner */
-  .hotel-change {
-    background: var(--sea);
-    color: white;
-    text-align: center;
-    padding: 10px 20px;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 500;
-    position: relative;
-    margin: 4px 0;
-    border-radius: 2px;
-  }
-
-  .hotel-change::before,
-  .hotel-change::after {
-    content: '⟶';
-    margin: 0 10px;
-    opacity: 0.6;
-  }
-
-  /* Note pill */
-  .note-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 8px;
-    padding: 4px 10px;
-    background: #fdf6e3;
-    border: 1px solid #ecddb8;
-    border-radius: 20px;
-    font-size: 11px;
-    color: #8a7040;
-    font-weight: 400;
-  }
-
-  /* Footer */
-  .footer {
-    margin-top: 36px;
-    padding-top: 24px;
-    border-top: 1px solid var(--sand);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-  }
-
-  .footer-stat {
-    text-align: center;
-    padding: 14px 20px;
-    background: var(--white);
-    border-radius: 2px;
-    min-width: 110px;
-    box-shadow: 0 1px 6px rgba(42,34,32,0.05);
-  }
-
-  .footer-stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 300;
-    color: var(--terracotta);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .footer-stat-label {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--text-light);
-    font-weight: 400;
-  }
-
-  @media (max-width: 480px) {
-    .day-card { grid-template-columns: 72px 1fr; }
-    .day-num { font-size: 28px; }
-    .day-right { padding: 14px 16px; }
-    .day-title { font-size: 17px; }
-  }
 </style>
 </head>
 <body>
-<div class="page">
 
-  <header class="header">
-    <div class="header-eyebrow">Two nights · One hotel change · July 2026</div>
-    <h1 class="header-title">Naples & the <em>Amalfi Coast</em></h1>
-    <div class="header-sub">5.5 days · Naples → Sorrento · Capri · Positano · Procida</div>
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <div class="site-logo">
+    <span class="site-logo-text">Naples & <span class="site-logo-em">Amalfi</span> · July 2026</span>
+  </div>
+  <div class="site-tabs">
+    <button class="site-tab active" onclick="showPage('itin', this)">📅 Itinerary</button>
+    <button class="site-tab" onclick="showPage('guide', this)">🗺 Destination Guide</button>
+  </div>
+</nav>
+
+<!-- ===== ITINERARY PAGE ===== -->
+<div id="itin-page" class="page active">
+<div class="itin-inner">
+
+  <header class="itin-header">
+    <div class="itin-eyebrow">1 hotel change · July 2026</div>
+    <h1 class="itin-title">Naples & the <em>Amalfi Coast</em></h1>
+    <div class="itin-sub">5.5 days · Naples → Sorrento · Capri · Positano · Procida</div>
+    <button class="guide-cta" onclick="showPage('guide', document.querySelectorAll('.site-tab')[1])">
+      🗺 Open Full Destination Guide →
+    </button>
   </header>
 
   <div class="legend">
@@ -351,7 +396,6 @@
 
   <div class="days">
 
-    <!-- July 3 -->
     <div class="day-card">
       <div class="day-left naples">
         <div class="day-num">3</div>
@@ -361,6 +405,9 @@
       </div>
       <div class="day-right">
         <div class="day-title">Arrive & Decompress</div>
+        <div class="day-links">
+          <button class="day-link-btn dl-naples" onclick="goGuide('n')">🏛 Naples Guide →</button>
+        </div>
         <ul class="activities">
           <li>Land morning, check into hotel, rest</li>
           <li>Afternoon stroll through <strong>Spaccanapoli</strong></li>
@@ -372,7 +419,6 @@
       </div>
     </div>
 
-    <!-- July 4 -->
     <div class="day-card">
       <div class="day-left island">
         <div class="day-num">4</div>
@@ -382,23 +428,23 @@
       </div>
       <div class="day-right">
         <div class="day-title">Procida Day Trip</div>
+        <div class="day-links">
+          <button class="day-link-btn dl-procida" onclick="goGuide('p')">🎨 Procida Guide →</button>
+        </div>
         <ul class="activities">
           <li>Morning hydrofoil from <strong>Molo Beverello</strong> → Procida (~40 min)</li>
-          <li>Wander the pastel fishing village of <strong>Marina Corricella</strong> — impossibly photogenic</li>
-          <li>Walk up to <strong>Terra Murata</strong> — the medieval hilltop for sweeping views</li>
+          <li>Wander the pastel fishing village of <strong>Marina Corricella</strong></li>
+          <li>Walk up to <strong>Terra Murata</strong> — medieval hilltop for sweeping views</li>
           <li>Long seafood lunch at a harbour-side restaurant</li>
           <li>Afternoon swim at <strong>Chiaiolella beach</strong> — calm, clear water</li>
           <li>Hydrofoil back to Naples early evening</li>
-          <li>Easy dinner near the hotel — rest up</li>
         </ul>
-        <div class="note-pill">🚢 Only 40 min each way — much less time on water than Ischia</div>
+        <div class="note-pill">🚢 Only 40 min each way — the most unspoiled island in the bay</div>
       </div>
     </div>
 
-    <!-- Hotel change -->
     <div class="hotel-change">Hotel Change · Naples → Sorrento</div>
 
-    <!-- July 5 -->
     <div class="day-card">
       <div class="day-left sorrento">
         <div class="day-num">5</div>
@@ -408,10 +454,13 @@
       </div>
       <div class="day-right">
         <div class="day-title">Arrive Sorrento · Settle In</div>
+        <div class="day-links">
+          <button class="day-link-btn dl-sorrento" onclick="goGuide('s')">🍋 Sorrento Guide →</button>
+        </div>
         <ul class="activities">
-          <li><strong>Circumvesuviana train</strong> Naples → Sorrento (~70 min, easy)</li>
+          <li><strong>Circumvesuviana train</strong> Naples → Sorrento (~70 min)</li>
           <li>Check in, lunch with a view of the Bay of Naples</li>
-          <li>Afternoon walk along the cliff-top path</li>
+          <li>Afternoon walk along the cliff-top path & Villa Comunale</li>
           <li>Explore the flat historic centre — shops, ceramics, limoncello</li>
           <li>Sunset aperitivo, relaxed dinner in town</li>
         </ul>
@@ -419,7 +468,6 @@
       </div>
     </div>
 
-    <!-- July 6 -->
     <div class="day-card">
       <div class="day-left island">
         <div class="day-num">6</div>
@@ -429,6 +477,9 @@
       </div>
       <div class="day-right">
         <div class="day-title">Capri Day Trip</div>
+        <div class="day-links">
+          <button class="day-link-btn dl-capri" onclick="goGuide('c')">⛵ Capri Guide →</button>
+        </div>
         <ul class="activities">
           <li>Ferry Sorrento → Capri <strong>(only 25 min — shortest crossing)</strong></li>
           <li>Morning in <strong>Anacapri</strong> — quieter, cooler, fewer crowds</li>
@@ -441,7 +492,6 @@
       </div>
     </div>
 
-    <!-- July 7 -->
     <div class="day-card">
       <div class="day-left coast">
         <div class="day-num">7</div>
@@ -451,20 +501,22 @@
       </div>
       <div class="day-right">
         <div class="day-title">Full Day in Positano</div>
+        <div class="day-links">
+          <button class="day-link-btn dl-positano" onclick="goGuide('pos')">🌊 Positano Guide →</button>
+        </div>
         <ul class="activities">
           <li>Morning ferry Sorrento → Positano (~35–40 min, scenic)</li>
           <li><strong>Pre-book sunbeds</strong> at a beach club — Lido Blu or La Scogliera</li>
           <li>Morning swim at <strong>Spiaggia Grande</strong></li>
-          <li>Slow lunch at a restaurant above the beach with views</li>
+          <li>Slow lunch at a restaurant above the beach</li>
           <li>Afternoon wander up through the village, terraces & boutiques</li>
           <li>Aperitivo watching the golden light hit the buildings</li>
           <li>Ferry back to Sorrento late afternoon/early evening</li>
         </ul>
-        <div class="note-pill">📍 7–8 hours gives you the full Positano experience</div>
+        <div class="note-pill">📍 Optional: hop the ferry to Amalfi + bus to Ravello on the way back</div>
       </div>
     </div>
 
-    <!-- July 8 -->
     <div class="day-card">
       <div class="day-left sorrento">
         <div class="day-num">8</div>
@@ -474,6 +526,10 @@
       </div>
       <div class="day-right">
         <div class="day-title">Sorrento Morning · Back to Naples</div>
+        <div class="day-links">
+          <button class="day-link-btn dl-naples" onclick="goGuide('n', 'n-food')">🍕 Naples Food →</button>
+          <button class="day-link-btn dl-naples" onclick="goGuide('n', 'n-sights')">🏛 Naples Sights →</button>
+        </div>
         <ul class="activities">
           <li>Slow morning — final coffee, final views, final limoncello shopping</li>
           <li>Train back to Naples midday</li>
@@ -485,7 +541,6 @@
       </div>
     </div>
 
-    <!-- July 9 -->
     <div class="day-card">
       <div class="day-left naples">
         <div class="day-num">9</div>
@@ -506,30 +561,1314 @@
 
   </div>
 
-  <!-- Footer stats -->
-  <div class="footer">
-    <div class="footer-stat">
-      <div class="footer-stat-num">1</div>
-      <div class="footer-stat-label">Hotel Change</div>
-    </div>
-    <div class="footer-stat">
-      <div class="footer-stat-num">2</div>
-      <div class="footer-stat-label">Islands</div>
-    </div>
-    <div class="footer-stat">
-      <div class="footer-stat-num">5.5</div>
-      <div class="footer-stat-label">Full Days</div>
-    </div>
-    <div class="footer-stat">
-      <div class="footer-stat-num">2</div>
-      <div class="footer-stat-label">Naples Nights</div>
-    </div>
-    <div class="footer-stat">
-      <div class="footer-stat-num">3</div>
-      <div class="footer-stat-label">Sorrento Nights</div>
+  <div class="itin-footer">
+    <div class="footer-stat"><div class="footer-stat-num">1</div><div class="footer-stat-label">Hotel Change</div></div>
+    <div class="footer-stat"><div class="footer-stat-num">2</div><div class="footer-stat-label">Islands</div></div>
+    <div class="footer-stat"><div class="footer-stat-num">5.5</div><div class="footer-stat-label">Full Days</div></div>
+    <div class="footer-stat"><div class="footer-stat-num">2</div><div class="footer-stat-label">Naples Nights</div></div>
+    <div class="footer-stat"><div class="footer-stat-num">3</div><div class="footer-stat-label">Sorrento Nights</div></div>
+  </div>
+
+  <div class="big-guide-cta">
+    <h3>Full <em>Destination Guide</em></h3>
+    <p>Sights, restaurants, local tips, ferry logistics, and pregnancy notes for every stop on the trip.</p>
+    <div class="big-guide-cta-btns">
+      <button class="dest-cta-btn btn-na" onclick="goGuide('n')">🏛 Naples</button>
+      <button class="dest-cta-btn btn-pr" onclick="goGuide('p')">🎨 Procida</button>
+      <button class="dest-cta-btn btn-so" onclick="goGuide('s')">🍋 Sorrento</button>
+      <button class="dest-cta-btn btn-ca" onclick="goGuide('c')">⛵ Capri</button>
+      <button class="dest-cta-btn btn-po" onclick="goGuide('pos')">🌊 Positano & Coast</button>
     </div>
   </div>
 
 </div>
+</div>
+
+<!-- ===== GUIDE PAGE ===== -->
+<div id="guide-page" class="page">
+
+<nav class="tnav">
+<button class="db active na" onclick="showD('n',this,'na')">🏛 Naples</button>
+<button class="db" onclick="showD('p',this,'pr')">🎨 Procida</button>
+<button class="db" onclick="showD('s',this,'so')">🍋 Sorrento</button>
+<button class="db" onclick="showD('c',this,'ca')">⛵ Capri</button>
+<button class="db" onclick="showD('pos',this,'po')">🌊 Positano &amp; Coast</button>
+</nav>
+<div id="dp-n" class="dp DN active">
+<div class="ph"><div class="pe">July 3 &amp; July 8 · 2 Nights</div>
+<h1 class="pt">Naples <em>— Napoli</em></h1>
+<p class="ps">One of Italy's great raw, chaotic, magnificent cities. The birthplace of pizza, home to world-class Roman artifacts, and full of neighborhoods that reward slow, curious walking.</p></div>
+<nav class="snav">
+<button class="sb active" onclick="showS(this,'n-sights')">🏛 Sights</button>
+<button class="sb" onclick="showS(this,'n-hoods')">🧭 Neighborhoods</button>
+<button class="sb" onclick="showS(this,'n-food')">🍕 Food</button>
+<button class="sb" onclick="showS(this,'n-coffee')">☕ Coffee</button>
+</nav>
+<div id="n-sights" class="cs active">
+<div class="ib">⚠️ <strong>Book ahead:</strong> The Cappella Sansevero and Underground Naples sell out weeks in advance in July. Book these immediately after your hotels.</div>
+<div class="cl"><span class="ct">Must-Book in Advance</span><div class="cln"></div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🏺</div><div class="ib2">
+<div class="it2">
+<div class="nm">Naples National Archaeological Museum (MANN)</div>
+<div class="bgs">
+<span class="bg bm">World-class</span>
+<span class="bg bp">Pregnancy-friendly</span>
+</div>
+</div>
+<div class="lc">📍 Piazza Museo Nazionale, 19</div>
+<div class="dc">The finest collection of Roman artifacts in the world — all from Pompeii and Herculaneum. The mosaics, bronzes, and Secret Cabinet are genuinely extraordinary. Fully climate-controlled — a perfect midday refuge from July heat. Allow 2–3 hours minimum.</div>
+<div class="tp">💡 Go first thing at 9am before tour groups. Closed Tuesdays.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.museoarcheologiconapoli.it/en/" target="_blank">Official Site →</a>
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187785-d243618-Reviews-National_Archaeological_Museum-Naples_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€15 · Daily 9am–7:30pm · Closed Tue</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🎭</div><div class="ib2">
+<div class="it2">
+<div class="nm">Cappella Sansevero — The Veiled Christ</div>
+<div class="bgs">
+<span class="bg bm">Unmissable</span>
+<span class="bg bb">Book 3–4 weeks ahead</span>
+</div>
+</div>
+<div class="lc">📍 Via Francesco De Sanctis, 19</div>
+<div class="dc">A marble sculpture — Christ beneath a translucent veil carved from one block in 1753 — so perfect visitors reach out expecting fabric. No photos. Timed entry sells out in July. One of the most astonishing things you will ever see.</div>
+<div class="tp">💡 30 minutes inside is enough. Book your time slot at museosansevero.it immediately.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.museosansevero.it/en/" target="_blank">Book Tickets →</a>
+<span class="dt">€8 · Wed–Mon 9am–7pm · No photos</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🕯️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Napoli Sotterranea — Underground Naples</div>
+<div class="bgs">
+<span class="bg bb">Book ahead</span>
+</div>
+</div>
+<div class="lc">📍 Piazza San Gaetano, 68</div>
+<div class="dc">250 miles of tunnels beneath the city carved over 2,400 years. Guided tours go 40 meters underground through Greek aqueducts and WWII shelters, carrying candles through passages so narrow shoulders scrape the walls. 80-minute tours.</div>
+<div class="tp">💡 Pregnancy note: Narrow passages and steps — manageable in 2nd trimester but confirm with the venue in advance.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.napolisotterranea.org/en/" target="_blank">Book Tickets →</a>
+<span class="dt">€10 · Tours daily at 10, 12, 2, 4, 6pm</span>
+</div></div>
+<div class="cl"><span class="ct">Free or Low Cost</span><div class="cln"></div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🌊</div><div class="ib2">
+<div class="it2">
+<div class="nm">Castel dell'Ovo & Lungomare</div>
+<div class="bgs">
+<span class="bg bf">Free</span>
+<span class="bg bp">Pregnancy-friendly</span>
+</div>
+</div>
+<div class="lc">📍 Via Eldorado, 3 · Santa Lucia waterfront</div>
+<div class="dc">Naples' oldest castle jutting into the bay with views of Vesuvius and Capri. Free to enter. The Lungomare Caracciolo promenade is one of the most beautiful evening walks in Italy — locals jog, families stroll. Completely flat.</div>
+<div class="tp">💡 Best at golden hour (7–8pm in July) when Vesuvius turns pink. Perfect first evening walk.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187785-d243611-Reviews-Castel_dell_Ovo-Naples_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Free · Daily 9am–7:30pm</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">⛪</div><div class="ib2">
+<div class="it2">
+<div class="nm">Santa Chiara Cloisters</div>
+<div class="bgs">
+<span class="bg bp">Pregnancy-friendly</span>
+</div>
+</div>
+<div class="lc">📍 Via Santa Chiara, 49c · Spaccanapoli</div>
+<div class="dc">A 14th-century courtyard lined with vivid 18th-century majolica tiles — an extraordinary oasis of silence in the middle of Naples' noise. Unlike anything else in Italy. A perfect 30-minute escape from the heat and chaos outside.</div>
+<div class="tp">💡 Enter from the side entrance on the left — the cloister is separate from the church.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.monasterodisantachiara.it/" target="_blank">Official Site →</a>
+<span class="dt">€6 · Mon–Sat 9:30am–5:30pm · Sun 10am–2:30pm</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">👑</div><div class="ib2">
+<div class="it2">
+<div class="nm">Piazza del Plebiscito & Royal Palace</div>
+<div class="bgs">
+<span class="bg bf">Piazza free</span>
+</div>
+</div>
+<div class="lc">📍 Piazza del Plebiscito, 1</div>
+<div class="dc">The grandest piazza in Naples, flanked by the Royal Palace and the imposing San Francesco di Paola church. The palace has grand staircases, velvet rooms, ceiling frescoes, and a miniature royal theatre. The piazza itself is free and one of the best places to sit with an espresso.</div>
+<div class="tp">💡 Free palace entry on the first Sunday of each month.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.palazzorealenapoli.it/" target="_blank">Royal Palace →</a>
+<span class="dt">Piazza free · Palace €10 · Thu–Tue 9am–8pm</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🎨</div><div class="ib2">
+<div class="it2">
+<div class="nm">Catacombs of San Gennaro</div>
+<div class="bgs">
+<span class="bg bl">Less crowded</span>
+</div>
+</div>
+<div class="lc">📍 Via Capodimonte, 13 · Rione Sanità</div>
+<div class="dc">Sweeping two-story subterranean basilicas with 2nd-century Christian frescoes — more beautiful and less claustrophobic than Underground Naples. Located in the authentic Rione Sanità neighborhood. Worth the short taxi ride. Guided tours only.</div>
+<div class="tp">💡 Walk down to Via San Gregorio Armeno after — the nativity craft street is open year-round.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.catacombedinapoli.it/en" target="_blank">Book Tickets →</a>
+<span class="dt">€9 · Tours daily 10am–5pm</span>
+</div></div>
+</div>
+<div id="n-hoods" class="cs">
+<div class="ib">Naples' neighborhoods are as much of an attraction as its monuments. The real city lives in these streets.</div>
+<div class="ic"><div class="ii">
+<div class="emi">🛵</div><div class="ib2">
+<div class="it2">
+<div class="nm">Spaccanapoli & Via dei Tribunali</div>
+<div class="bgs">
+<span class="bg bm">Start here</span>
+<span class="bg bf">Free</span>
+</div>
+</div>
+<div class="lc">📍 Runs east-west through the Historic Center · UNESCO</div>
+<div class="dc">The street that literally "splits Naples" — a perfectly straight line along the ancient Greek road grid. Motorcycles speed past, shopkeepers argue, walls covered in religious art and graffiti. Via dei Tribunali running parallel is the pizza and food street. More Neapolitan life per meter than anywhere else in the city.</div>
+<div class="tp">💡 Walk east from Piazza del Gesù Nuovo — the street gets progressively more local and less touristy.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Spaccanapoli+Naples" target="_blank">View on Map →</a>
+<span class="dt">Free · Best 8–11am · Allow 1–2 hours</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍊</div><div class="ib2">
+<div class="it2">
+<div class="nm">Quartieri Spagnoli — Spanish Quarter</div>
+<div class="bgs">
+<span class="bg bl">Local favorite</span>
+<span class="bg bf">Free</span>
+</div>
+</div>
+<div class="lc">📍 West of Via Toledo</div>
+<div class="dc">16th-century alleyways — washing lines overhead, street shrines on every corner, small bars and trattorias with no tourist menus. Home to the famous Maradona murals. This is where locals eat lunch on a Tuesday. Genuinely authentic.</div>
+<div class="tp">💡 Look for the Maradona mural on Via Emanuele De Deo — a surprisingly moving piece of street art.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Quartieri+Spagnoli+Naples" target="_blank">View on Map →</a>
+<span class="dt">Free · Best in the evening</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🌅</div><div class="ib2">
+<div class="it2">
+<div class="nm">Lungomare Caracciolo</div>
+<div class="bgs">
+<span class="bg bp">Pregnancy-friendly</span>
+<span class="bg bf">Free</span>
+</div>
+</div>
+<div class="lc">📍 Via Francesco Caracciolo · Santa Lucia to Mergellina</div>
+<div class="dc">The long seafront promenade running from Santa Lucia west toward the Posillipo hills. Closed to traffic evenings and weekends. Completely flat. The stretch near Castel dell'Ovo at sunset is extraordinary. Perfect first-evening walk.</div>
+<div class="tp">💡 3km of flat walking. Pick up a gelato from a kiosk near Castel dell'Ovo.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Lungomare+Caracciolo+Naples" target="_blank">View on Map →</a>
+<span class="dt">Free · Best 7–9pm · Completely flat</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🎪</div><div class="ib2">
+<div class="it2">
+<div class="nm">Piazza Bellini — Aperitivo Hour</div>
+<div class="bgs">
+<span class="bg bl">Where locals go</span>
+<span class="bg bf">Free</span>
+</div>
+</div>
+<div class="lc">📍 Northern edge of Historic Center</div>
+<div class="dc">Outdoor café terraces built around ancient Greek city walls — where young Neapolitans come for aperitivo. Locals specifically call this out as "the real Naples." Best at 6–8pm as the city cools down.</div>
+<div class="tp">💡 Order an Aperol Spritz or Campari Soda and people-watch. Perfect pre-dinner ritual.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Piazza+Bellini+Naples" target="_blank">View on Map →</a>
+<span class="dt">Free · Best 6–9pm</span>
+</div></div>
+</div>
+<div id="n-food" class="cs">
+<div class="bx gc"><h4>🥙 Essential Naples Street Food</h4><ul class="ul">
+<li><strong>Pizza a portafoglio</strong> — pizza folded into four, eaten standing on Via dei Tribunali. €1.50–2. How locals eat pizza at lunch.</li>
+<li><strong>Sfogliatella</strong> — lobster-tail pastry of shatteringly crisp layers filled with hot citrus ricotta cream. Buy warm from a bakery. €1.50–2.</li>
+<li><strong>Frittatina di pasta</strong> — deep-fried pasta cake with béchamel and ragù inside. €2 from street windows. Sounds weird, tastes extraordinary.</li>
+<li><strong>Cuoppo di mare</strong> — a paper cone of mixed fried seafood. €3–5 near the waterfront.</li>
+<li><strong>Pizza fritta</strong> — fried pizza, born in the postwar years. €2.50. Look for it in the Spanish Quarter.</li>
+</ul></div>
+<div class="cl"><span class="ct">🍕 Pizza Pilgrimages</span><div class="cln"></div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍕</div><div class="ib2">
+<div class="it2">
+<div class="nm">L'Antica Pizzeria da Michele</div>
+<div class="bgs">
+<span class="bg bm">Legendary</span>
+</div>
+</div>
+<div class="lc">📍 Via Cesare Sersale, 1 · Est. 1870 · Walk-in only</div>
+<div class="dc">The most famous pizzeria in the world. Two pizzas only: Margherita and Marinara. No reservations, no substitutions, €5–7. Known from Eat Pray Love but beloved by Neapolitans for 150 years. The queue is part of the experience — locals and visitors wait together in what feels like a holy ceremony. Cash only.</div>
+<div class="tp">💡 Arrive before noon or after 2:30pm. The queue moves faster than it looks.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187785-d1087551-Reviews-L_Antica_Pizzeria_da_Michele-Naples_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<a class="lk" href="https://maps.google.com/?q=L+Antica+Pizzeria+da+Michele+Naples" target="_blank">Directions →</a>
+<span class="dt">€5–7 · Walk-in · No reservations · Cash only</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍕</div><div class="ib2">
+<div class="it2">
+<div class="nm">Gino Sorbillo</div>
+<div class="bgs">
+<span class="bg bm">Classic</span>
+</div>
+</div>
+<div class="lc">📍 Via dei Tribunali 32 · Historic Center</div>
+<div class="dc">The most famous family name in Neapolitan pizza. More variety than da Michele, online bookings accepted for dinner. The Margherita is €5. Go for lunch at opening (12pm) to beat the queue.</div>
+<div class="tp">💡 Book online for dinner. Walk-in works for lunch if you arrive early.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.sorbillo.it/" target="_blank">Book Online →</a>
+<span class="dt">From €5 · Bookings for dinner</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍕</div><div class="ib2">
+<div class="it2">
+<div class="nm">50 Kalò</div>
+<div class="bgs">
+<span class="bg bl">Modern local pick</span>
+</div>
+</div>
+<div class="lc">📍 Piazza Sannazaro, 201 · Mergellina waterfront</div>
+<div class="dc">Contemporary Neapolitan pizza destination — widely regarded as one of the best pizzas anywhere. Away from the tourist center in the local Mergellina neighborhood. Opened by a Neapolitan pizzaiolo champion. The dough is exceptionally light. Book ahead.</div>
+<div class="tp">💡 Combine dinner here with a sunset waterfront walk toward Posillipo.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.50kalo.it/en" target="_blank">Book Online →</a>
+<span class="dt">From €7 · Bookings recommended</span>
+</div></div>
+<div class="cl"><span class="ct">🍝 Local Trattorias</span><div class="cln"></div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍝</div><div class="ib2">
+<div class="it2">
+<div class="nm">Osteria della Mattonella</div>
+<div class="bgs">
+<span class="bg bl">Local institution</span>
+</div>
+</div>
+<div class="lc">📍 Via Giovanni Nicotera 13 · Chiaia</div>
+<div class="dc">No-frills, mismatched-chairs local restaurant consistently called out as the "real deal" by food writers. Menu changes daily. Wine poured like water. Regulars dig into grilled lamb, meatballs, and escarole with olives and capers. Book ahead — it's small.</div>
+<div class="tp">💡 Go for lunch — even more local at midday. Cash preferred.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187785-d1115819-Reviews-Osteria_della_Mattonella-Naples_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€10–18pp · Book ahead · Cash preferred</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🦑</div><div class="ib2">
+<div class="it2">
+<div class="nm">Ristorante da Dora</div>
+<div class="bgs">
+<span class="bg bl">Seafood temple</span>
+<span class="bg bb">Book ahead</span>
+</div>
+</div>
+<div class="lc">📍 Via Ferdinando Palasciano, 30 · Chiaia</div>
+<div class="dc">If there's a temple of seafood in Naples, many locals point here. The pasta with mussels is legendary. Spaghetti alle vongole with tiny clams in their shells is outstanding. Perfectly suited for a pregnant traveler — all seafood is cooked. Reviewers write "run don't walk."</div>
+<div class="tp">💡 Ask the waiter for recommendations — they'll steer you right.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187785-d793085-Reviews-Da_Dora-Naples_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€20–35pp · Book a day ahead in July</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍋</div><div class="ib2">
+<div class="it2">
+<div class="nm">Trattoria Da Nennella</div>
+<div class="bgs">
+<span class="bg bl">Most local experience</span>
+</div>
+</div>
+<div class="lc">📍 Vico Lungo Teatro Nuovo 103 · Spanish Quarter</div>
+<div class="dc">Deep in the Spanish Quarter. Long communal tables, loud, chaotic, full of Neapolitans. Chalkboard menu, enormous portions. The pasta e patate (pasta with potato and pecorino) is one of those dishes originally made for the poor that became something extraordinary. Extremely cheap. No reservations.</div>
+<div class="tp">💡 Go early (12:30pm lunch, 7:30pm dinner) — fills fast with locals. Cash only.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187785-d2072524-Reviews-Trattoria_da_Nennella-Naples_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€8–14pp · No reservations · Cash only</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🌊</div><div class="ib2">
+<div class="it2">
+<div class="nm">Palazzo Petrucci</div>
+<div class="bgs">
+<span class="bg bm">Special occasion dinner</span>
+</div>
+</div>
+<div class="lc">📍 Posillipo waterfront · Scenic neighborhood</div>
+<div class="dc">Fine dining with substance above the beach in Posillipo. Sea urchin risotto served in its spiny shell, local red prawn crudo, reimagined sfogliatella for dessert. Neapolitan professionals' special occasion restaurant. Not a tourist destination. Book well ahead.</div>
+<div class="tp">💡 ~15 min taxi from center. Combine with a sunset walk along the Posillipo cliff path.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.palazzopetrucci.it/" target="_blank">Book Online →</a>
+<span class="dt">€45–70pp · Book several days ahead</span>
+</div></div>
+<div class="bx bc"><h4>🍽 Dining Like a Local in Naples</h4><ul class="ul">
+<li>Dinner starts at 8:30–9pm. Tip by rounding up or leaving €1–2 — the American 20% is not expected.</li>
+<li>Tap water is rarely served — bottled still or sparkling is the norm.</li>
+<li>Order a <strong>caffè sospeso</strong> (suspended coffee) at any bar — you pay for two, the second goes to whoever needs one. A Naples tradition of solidarity.</li>
+</ul></div>
+</div>
+<div id="n-coffee" class="cs">
+<div class="ib">Naples takes coffee more seriously than anywhere else in Italy. Locals drink standing at the bar, pay €1, and leave. The whole ritual takes under 3 minutes.</div>
+<div class="ic"><div class="ii">
+<div class="emi">☕</div><div class="ib2">
+<div class="it2">
+<div class="nm">Gran Caffè Gambrinus</div>
+<div class="bgs">
+<span class="bg bm">Historic institution</span>
+</div>
+</div>
+<div class="lc">📍 Via Chiaia 1–2 · Piazza del Plebiscito</div>
+<div class="dc">Open since 1860. Belle époque interiors where Oscar Wilde and Hemingway once sat. Coffee and pastries are exceptional — try the sfogliatella or babà al rum. Standing at the bar for an espresso is the classic experience (€1.20 — one of the great bargains in Italy).</div>
+<div class="tp">💡 Best for breakfast or morning coffee before sightseeing. The perfect start to the day.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.grancaffegambrinus.com/" target="_blank">Official Site →</a>
+<span class="dt">Espresso €1–2 standing · Daily 7am–11pm</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">☕</div><div class="ib2">
+<div class="it2">
+<div class="nm">Caffè Mexico</div>
+<div class="bgs">
+<span class="bg bl">Locals' daily bar</span>
+</div>
+</div>
+<div class="lc">📍 Piazza Garibaldi 72 · Also Via Scarlatti (Vomero)</div>
+<div class="dc">Where Neapolitans actually drink their daily coffee. The star of July mornings: <strong>granita di caffè con panna</strong> — iced coffee granita with whipped cream, €2. One of the great simple pleasures of summer in Naples. Don't leave without having one.</div>
+<div class="tp">💡 Order granita di caffè con panna every single morning. You will not regret it.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Caffè+Mexico+Naples+Piazza+Garibaldi" target="_blank">Directions →</a>
+<span class="dt">Espresso €1 · Granita €2 · Standing bar</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍦</div><div class="ib2">
+<div class="it2">
+<div class="nm">Gelateria Mennella</div>
+<div class="bgs">
+<span class="bg bl">Best gelato in Naples</span>
+</div>
+</div>
+<div class="lc">📍 Multiple central locations</div>
+<div class="dc">Consistently cited by Neapolitans as the best gelato in the city. Natural ingredients, seasonal flavors. The fior di latte (pure cream) and nocciola (hazelnut) are outstanding. In July the strawberry (fragola) is at its peak. Perfect for the Lungomare evening walk.</div>
+<div class="tp">💡 Grab a cone before walking toward Castel dell'Ovo at sunset. €2.50–4.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187785-d2065408-Reviews-Gelateria_Mennella-Naples_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€2.50–4 · Multiple central locations</span>
+</div></div>
+</div>
+</div>
+<div id="dp-p" class="dp PR">
+<div class="ph"><div class="pe">July 4 · Day Trip from Naples · ~40 min hydrofoil</div>
+<h1 class="pt">Procida <em>— Italy's Hidden Gem</em></h1>
+<p class="ps">Tiny, colorful, genuine. Italy's 2022 Capital of Culture. Only 4 square kilometers — you can walk across it. The most unspoiled island in the Bay of Naples and a perfect full day trip.</p></div>
+<nav class="snav">
+<button class="sb active" onclick="showS(this,'p-sights')">🎨 Sights & Beaches</button>
+<button class="sb" onclick="showS(this,'p-food')">🦞 Food & Restaurants</button>
+<button class="sb" onclick="showS(this,'p-tips')">📋 Day Trip Tips</button>
+</nav>
+<div id="p-sights" class="cs active">
+<div class="ib">Procida is less a cultural destination and more a retreat where you slow down and enjoy timeless Mediterranean life. The whole charm is in simply being there.</div>
+<div class="ic"><div class="ii">
+<div class="emi">🏘️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Marina Corricella</div>
+<div class="bgs">
+<span class="bg bm">Don't miss</span>
+</div>
+</div>
+<div class="lc">📍 South side of the island · No cars</div>
+<div class="dc">The most beautiful spot on Procida — a car-free fishing village of pastel houses stacked above a small harbor where fishermen still weave their nets. Featured in The Talented Mr. Ripley and Dolce & Gabbana campaigns. Give yourself at least 2 hours here.</div>
+<div class="tp">💡 Descend from above for the iconic stacked-houses view before going down to the waterfront.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187787-d2340516-Reviews-Marina_di_Corricella-Procida_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Free · Best in morning light</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🏰</div><div class="ib2">
+<div class="it2">
+<div class="nm">Terra Murata — Historic Hilltop</div>
+<div class="bgs">
+<span class="bg bm">Best views</span>
+</div>
+</div>
+<div class="lc">📍 Highest point of the island</div>
+<div class="dc">The ancient historic center crowned by the 11th-century Abbazia di San Michele. Walk through narrow streets to the hilltop — views over the Gulf of Naples are extraordinary. Visit the abbey and nearby Palazzo D'Avalos (former prison). Take the C2 bus or walk up.</div>
+<div class="tp">💡 Go early morning before the heat builds. The walk up rewards you with increasingly good views.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187787-d2340510-Reviews-Terra_Murata-Procida_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Free to walk · Abbey free · D'Avalos tour €12</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🏖️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Spiaggia Chiaiolella</div>
+<div class="bgs">
+<span class="bg bp">Best swimming</span>
+</div>
+</div>
+<div class="lc">📍 Western side of the island</div>
+<div class="dc">The best and most accessible beach on Procida — long sandy stretch with calm, clear water overlooking Ischia. Far less crowded than anything on Capri. Mix of free public beach and equipped sunbed areas. Perfect for a long afternoon swim.</div>
+<div class="tp">💡 The western end near Chiaiolella town is most scenic and has the best waterside restaurants.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187787-d2340512-Reviews-Chiaiolella-Procida_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Free public beach · Sunbeds for hire</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🚲</div><div class="ib2">
+<div class="it2">
+<div class="nm">Rent an E-Bike & Explore</div>
+<div class="bgs">
+<span class="bg bl">Best way around</span>
+</div>
+</div>
+<div class="lc">📍 Rental shops near Marina Grande port</div>
+<div class="dc">The best way to explore Procida in a day — the island is tiny but hilly, and e-bikes make it effortless. Around €30 for the day. Lap the entire island multiple times and stop wherever catches your eye. No cars allowed April–October so roads are peaceful.</div>
+<div class="tp">💡 Pregnancy note — e-bikes are smooth and manageable in the second trimester. The electric assist removes almost all effort on hills.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=e-bike+rental+Procida" target="_blank">Find Rentals →</a>
+<span class="dt">~€30/day · Available at Marina Grande</span>
+</div></div>
+</div>
+<div id="p-food" class="cs">
+<div class="bx gc"><h4>🍋 Procida's Signature Flavors</h4><ul class="ul">
+<li><strong>Insalata di limoni</strong> — fresh local lemon slices with garlic, olive oil, red pepper, mint, and salt. The lemons here are less acidic and naturally sweeter. Try it everywhere.</li>
+<li><strong>Spaghetti con le canocchie</strong> — pasta with locally caught mantis shrimp. A Procida specialty you won't easily find elsewhere.</li>
+<li><strong>Spaghetti ai ricci di mare</strong> — pasta with sea urchin. Intensely rich and briny — the taste of the island in a bowl.</li>
+<li><strong>Lingua di bue</strong> — the local pastry ("ox tongue") unique to Procida. Get one at any bar with your morning coffee.</li>
+<li><strong>Lemon granita</strong> — made with Procida's famous lemons. Felice Mare is the most celebrated granita spot on the island.</li>
+</ul></div>
+<div class="ic"><div class="ii">
+<div class="emi">🦞</div><div class="ib2">
+<div class="it2">
+<div class="nm">Il Pescatore</div>
+<div class="bgs">
+<span class="bg bm">Best on the island</span>
+</div>
+</div>
+<div class="lc">📍 Via Marina di Corricella, 45</div>
+<div class="dc">Widely regarded as the finest dining experience on Procida — tables on the water at Corricella with the pastel houses rising behind. Creative seafood, local lemon salad, and the freshest catch from fishermen who supply the restaurant directly. Staff guide you through the menu with genuine passion. Book ahead.</div>
+<div class="tp">💡 Ask for a table at the very front, on the water. Book at least a day ahead in July.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187787-d2094988-Reviews-Il_Pescatore-Procida_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€25–40pp · Book ahead</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🌊</div><div class="ib2">
+<div class="it2">
+<div class="nm">Da Girone (Gironè)</div>
+<div class="bgs">
+<span class="bg bl">Local institution</span>
+</div>
+</div>
+<div class="lc">📍 Lungomare Cristoforo Colombo, 4</div>
+<div class="dc">A landmark restaurant on Procida, known on the mainland. Chef-host Girone selects ingredients personally each day from local fishermen. Specialty: spaghetti with lemon pesto, mussels and mint. Wood-fired Neapolitan pizza also available. Very popular with locals — book in advance.</div>
+<div class="tp">💡 "We found Gironès by accident on a bus trip, made a booking for two nights later — absolutely incredible." — TripAdvisor.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187787-d2092688-Reviews-Da_Girone-Procida_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€20–35pp · Book ahead in July</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍋</div><div class="ib2">
+<div class="it2">
+<div class="nm">Ristorante Da Mariano</div>
+<div class="bgs">
+<span class="bg bl">Hidden gem</span>
+</div>
+</div>
+<div class="lc">📍 Marina Chiaiolella · Near the beach</div>
+<div class="dc">A small harborside gem considered by some the best dining spot in all of Italy. Seafood pasta and insalata di limoni are outstanding. The signature torta procidana (lemon and white chocolate cake) must be ordered. Reservations essential.</div>
+<div class="tp">💡 Combine with an afternoon at Chiaiolella beach — perfect lunch spot before swimming.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187787-d2092649-Reviews-Ristorante_da_Mariano-Procida_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€20–35pp · Reservations necessary</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍊</div><div class="ib2">
+<div class="it2">
+<div class="nm">La Gorgonia</div>
+<div class="bgs">
+<span class="bg bl">Lemon salad specialist</span>
+</div>
+</div>
+<div class="lc">📍 Near Marina Chiaiolella</div>
+<div class="dc">If you want to try Procida's famous lemon salad in its best form, this is the place. Sautéed mussels and clams, oven-baked fish with potatoes — all traditional recipes. Welcoming atmosphere and excellent service. Good choice for a relaxed lunch.</div>
+<div class="tp">💡 The lemon salad here is genuinely different — the lemons are naturally sweeter than anything you've had before.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187787-d2316614-Reviews-La_Gorgonia-Procida_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€18–28pp · Booking recommended</span>
+</div></div>
+</div>
+<div id="p-tips" class="cs">
+<div class="ib">Everything you need to know for a perfect Procida day trip from Naples.</div>
+<div class="bx gc"><h4>🚢 Ferry Logistics</h4><ul class="ul">
+<li><strong>Depart from:</strong> Molo Beverello port, Naples (the waterfront port — not the train station)</li>
+<li><strong>Journey time:</strong> ~40 minutes by hydrofoil (aliscafo)</li>
+<li><strong>Frequency:</strong> Several departures per morning in July — take the 8:00–9:00am boat</li>
+<li><strong>Return:</strong> Last ferries back to Naples around 7–8pm</li>
+<li><strong>Operators:</strong> Caremar and SNAV run this route — tickets at port or online</li>
+<li><strong>Important:</strong> No private cars allowed on the island from April–October</li>
+</ul></div>
+<div class="bx pc"><h4>🤰 For Your Pregnant Traveler</h4><ul class="ul">
+<li>E-bikes are the best transport option — gentle, no effort, you control the pace.</li>
+<li>Chiaiolella beach is the most accessible for swimming — flat and calm water.</li>
+<li>Most Corricella restaurants have outdoor terraces — stop for lunch early (12:30pm) to avoid midday heat.</li>
+<li>All food on Procida is cooked seafood — nothing to avoid. The lemon salad is pregnancy-safe.</li>
+<li>Shade is limited in Terra Murata — go early morning before 10am.</li>
+</ul></div>
+<div class="bx rc"><h4>📅 Suggested Day Flow</h4><ul class="ul">
+<li><strong>8:30am</strong> — Ferry from Naples (Molo Beverello)</li>
+<li><strong>9:15am</strong> — Arrive Marina Grande, rent e-bikes, ride up to Terra Murata for morning views</li>
+<li><strong>10:30am</strong> — Descend to Marina Corricella — wander the lanes and harbourfront</li>
+<li><strong>12:30pm</strong> — Long seafood lunch at Il Pescatore or Da Girone</li>
+<li><strong>2:30pm</strong> — Bike across to Chiaiolella beach for afternoon swim</li>
+<li><strong>5:00pm</strong> — Aperitivo at a harbourside bar watching the sunset over Ischia</li>
+<li><strong>6:30pm</strong> — Ferry back to Naples</li>
+</ul></div>
+</div>
+</div>
+<div id="dp-s" class="dp SO">
+<div class="ph"><div class="pe">July 5–8 · Your Main Base · 3 Nights</div>
+<h1 class="pt">Sorrento <em>— Your Home Base</em></h1>
+<p class="ps">A genuine Italian town perched on cliffs above the Bay of Naples. Flat, walkable, excellent food, and the most practical base on the entire coast. Ferry connections to Capri, Positano, and Naples all within easy reach.</p></div>
+<nav class="snav">
+<button class="sb active" onclick="showS(this,'s-sights')">🍋 Sights & Areas</button>
+<button class="sb" onclick="showS(this,'s-food')">🍝 Food</button>
+<button class="sb" onclick="showS(this,'s-tips')">📋 Getting Around</button>
+</nav>
+<div id="s-sights" class="cs active">
+<div class="ib">Sorrento is a city for relaxing and enjoying southern Italian hospitality. The pleasure is in slow strolling, the views, and the food. Use it as a launchpad and let it be a restorative base between adventures.</div>
+<div class="ic"><div class="ii">
+<div class="emi">🌅</div><div class="ib2">
+<div class="it2">
+<div class="nm">Villa Comunale Park & Bay Views</div>
+<div class="bgs">
+<span class="bg bf">Free</span>
+<span class="bg bp">Pregnancy-friendly</span>
+</div>
+</div>
+<div class="lc">📍 Near the clifftop, central Sorrento</div>
+<div class="dc">A small park perched high above the sea with panoramic views of the Bay of Naples and Mount Vesuvius. On a clear day you can see Capri, Ischia, and Procida. One of the most romantic sunset spots in Italy. The Sorrento Lift to the ferry port is right next door.</div>
+<div class="tp">💡 Visit at sunset — the Vesuvius silhouette against a pink sky is one of the great free views on the coast.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Villa+Comunale+Sorrento" target="_blank">View on Map →</a>
+<span class="dt">Free · Best 7–8pm in July</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🛍️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Piazza Tasso & Corso Italia</div>
+<div class="bgs">
+<span class="bg bf">Free</span>
+</div>
+</div>
+<div class="lc">📍 Heart of Sorrento</div>
+<div class="dc">Piazza Tasso is the animated main square — the place to sit with an Aperol Spritz at Fauno Bar and people-watch. Corso Italia is the main shopping street where locals do their evening passeggiata. Lined with ceramic shops, limoncello stores, leather goods, and good cafés.</div>
+<div class="tp">💡 The Via San Cesareo lanes branching off Piazza Tasso are where locals shop for fruit and vegetables — charming and authentic.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Piazza+Tasso+Sorrento" target="_blank">View on Map →</a>
+<span class="dt">Free · Best in the evening</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🏺</div><div class="ib2">
+<div class="it2">
+<div class="nm">Vallone dei Mulini — Valley of the Mills</div>
+<div class="bgs">
+<span class="bg bf">Free to view</span>
+</div>
+</div>
+<div class="lc">📍 Behind Piazza Tasso · visible from the railing</div>
+<div class="dc">A hidden overgrown gorge right in the center of Sorrento — ancient ruins of a water-powered mill swallowed by lush vegetation, visible from the railing just a few meters from Piazza Tasso. One of the most surreal unexpected sights in the town. Takes 5 minutes and is completely free.</div>
+<div class="tp">💡 Look for the railings on Viale Enrico Caruso, just off Piazza Tasso. Takes 5 minutes.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Vallone+dei+Mulini+Sorrento" target="_blank">View on Map →</a>
+<span class="dt">Free · 5-minute stop · Always open</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">⛪</div><div class="ib2">
+<div class="it2">
+<div class="nm">Cloister of San Francesco</div>
+<div class="bgs">
+<span class="bg bf">Free</span>
+<span class="bg bp">Pregnancy-friendly</span>
+</div>
+</div>
+<div class="lc">📍 Via San Francesco · Near Villa Comunale</div>
+<div class="dc">A Medieval cloister from the 1300s — peaceful, shaded, and beautiful. Free to enter. The arched courtyard with its interlocking Arab-Sicilian and Gothic arches is a quiet respite from the heat of the town. Often used as a venue for the Sorrento classical music festival in July.</div>
+<div class="tp">💡 Right next to Villa Comunale — combine both into a 30-minute morning or late-afternoon walk.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Cloister+San+Francesco+Sorrento" target="_blank">View on Map →</a>
+<span class="dt">Free · Morning hours</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🐟</div><div class="ib2">
+<div class="it2">
+<div class="nm">Marina Grande — The Fishing Village</div>
+<div class="bgs">
+<span class="bg bl">Hidden in plain sight</span>
+</div>
+</div>
+<div class="lc">📍 ~15 min walk from Villa Comunale down to sea level</div>
+<div class="dc">Sorrento's old fishing village at sea level — colorful boats, narrow alleys, old homes, and seafood restaurants along the water's edge. Go in the morning to watch fishermen unload their catch. Excellent for lunch. Use the Sorrento Lift (a few euros) to get back up without the steep climb.</div>
+<div class="tp">💡 Come morning for the catch of the day unloading, stay for lunch. Trattoria da Emilia and Ristorante Bagni Delfino are the local picks.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Marina+Grande+Sorrento" target="_blank">View on Map →</a>
+<span class="dt">Free · 15 min downhill walk · Use lift to return</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🏛️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Bagni Regina Giovanna</div>
+<div class="bgs">
+<span class="bg bl">Local secret</span>
+</div>
+</div>
+<div class="lc">📍 Capo di Sorrento · ~2.5km west of center</div>
+<div class="dc">One of Sorrento's best-kept secrets — a natural rock pool surrounded by the ruins of an ancient Roman villa with crystal-clear water perfect for swimming. Locals would send you here over any crowded beach club. Feels wild and untouched.</div>
+<div class="tp">💡 Wear swimming shoes — rocky entry. A taxi costs about €10 each way. Worth it.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187782-d2095011-Reviews-Bagni_Regina_Giovanna-Sorrento_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Free · ~2.5km west · Taxi recommended</span>
+</div></div>
+</div>
+<div id="s-food" class="cs">
+<div class="ib">Sorrento has excellent food — proximity to Naples means good pizza, and the Bay of Naples means excellent seafood. Lemon-based everything is a specialty: limoncello, lemon pasta, lemon granita. The lemons here are extraordinary.</div>
+<div class="ic"><div class="ii">
+<div class="emi">🍝</div><div class="ib2">
+<div class="it2">
+<div class="nm">Inn Bufalito</div>
+<div class="bgs">
+<span class="bg bl">Locals love it</span>
+</div>
+</div>
+<div class="lc">📍 Vico I Fuoro, 21 · Historic Center</div>
+<div class="dc">Serving all things buffalo — steaks, pastas, and exceptional buffalo mozzarella from nearby farms. One of the most consistently praised restaurants in Sorrento. Cozy interior, excellent service, well-priced for the quality. The mozzarella here tastes genuinely different.</div>
+<div class="tp">💡 Book ahead for dinner in July. The buffalo mozzarella with tomatoes is the best starter on the menu.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187782-d2357003-Reviews-Inn_Bufalito-Sorrento_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€20–30pp · Book for dinner</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🐟</div><div class="ib2">
+<div class="it2">
+<div class="nm">Ristorante Bagni Delfino</div>
+<div class="bgs">
+<span class="bg bl">Marina Grande seafood</span>
+</div>
+</div>
+<div class="lc">📍 Marina Grande · Sea level fishing village</div>
+<div class="dc">A more refined dining experience at Marina Grande with stunning views over the Bay of Naples. Fresh catch of the day, excellent pasta, and a panorama that includes Vesuvius and Capri in the distance. Popular with locals especially at weekends — book in advance.</div>
+<div class="tp">💡 The setting is genuinely magical for an evening meal.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187782-d778023-Reviews-Ristorante_Bagni_Delfino-Sorrento_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€25–40pp · Booking recommended weekends</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍕</div><div class="ib2">
+<div class="it2">
+<div class="nm">Trattoria da Emilia</div>
+<div class="bgs">
+<span class="bg bl">Rustic local pick</span>
+</div>
+</div>
+<div class="lc">📍 Marina Grande</div>
+<div class="dc">The rustic, no-frills option at Marina Grande — plates piled high with grilled calamari, daily fish specials, and simple pasta. The kind of place where you sit outside watching fishing boats and spend very little money for very good food. Locals eat here for weekday lunch.</div>
+<div class="tp">💡 Best for lunch — arrive before 1pm. Very casual, no need to book.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187782-d778025-Reviews-Trattoria_da_Emilia-Sorrento_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€12–20pp · Walk-in · Lunch best</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍋</div><div class="ib2">
+<div class="it2">
+<div class="nm">Limoncello Tasting</div>
+<div class="bgs">
+<span class="bg bl">Local experience</span>
+</div>
+</div>
+<div class="lc">📍 Multiple producers around Sorrento</div>
+<div class="dc">Sorrento is the home of limoncello. The Sorrentine lemon (Limone di Sorrento IGP) is a protected variety — intensely fragrant, enormous, and used in everything. Many producers offer tastings. Buy a bottle to take home — it costs a fraction of airport prices.</div>
+<div class="tp">💡 Villa Massa is the most famous commercial producer. For a more artisan experience look for small family producers near Via Capodimonte.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.villamassa.com/en/visit-us" target="_blank">Villa Massa Tours →</a>
+<span class="dt">€5–10 for tastings · Many options</span>
+</div></div>
+</div>
+<div id="s-tips" class="cs">
+<div class="bx gc"><h4>🚢 Ferry Connections from Sorrento</h4><ul class="ul">
+<li><strong>Capri:</strong> 25 min · Multiple daily departures · Book tickets in advance in July · Depart from Marina Piccola (use the lift from town)</li>
+<li><strong>Positano:</strong> 35–40 min ferry along the coast · Morning ferries are calmest</li>
+<li><strong>Amalfi town:</strong> ~60–70 min ferry · Also reachable by SITA bus (windy but scenic)</li>
+<li><strong>Naples:</strong> 70 min Circumvesuviana train from Sorrento station · Fast, cheap, reliable</li>
+<li><strong>Campania Express:</strong> Seasonal, air-conditioned train alternative with fewer stops</li>
+</ul></div>
+<div class="bx sc"><h4>🏋 The Sorrento Lift</h4><ul class="ul">
+<li>Connects the clifftop town to Marina Piccola (ferry port) — a few euros each way</li>
+<li>Essential for saving your legs on hot days — the walk down is fine but the climb back up in July heat is brutal</li>
+<li>Located near Villa Comunale park · Opens early for ferry departures</li>
+</ul></div>
+<div class="bx pc"><h4>🤰 Sorrento for a Pregnant Traveler</h4><ul class="ul">
+<li>The historic center is almost entirely flat — by far the easiest base on the coast for walking.</li>
+<li>All ferries depart from Marina Piccola (accessible by lift — no steep climb required).</li>
+<li>July heat peaks 12–4pm: plan activities morning and evening, rest midday in your air-conditioned hotel.</li>
+<li>Bagni Regina Giovanna is a great calm swimming option — less crowded than beach clubs.</li>
+</ul></div>
+</div>
+</div>
+<div id="dp-c" class="dp CA">
+<div class="ph"><div class="pe">July 6 · Day Trip from Sorrento · 25 min ferry</div>
+<h1 class="pt">Capri <em>— The Glamorous Island</em></h1>
+<p class="ps">Dramatic limestone cliffs, crystal-clear water, Roman ruins, designer boutiques, and the most photographed rock formations in the Mediterranean. Book your ferry from Sorrento early — 25 minutes is the shortest crossing available.</p></div>
+<nav class="snav">
+<button class="sb active" onclick="showS(this,'c-sights')">⛵ Sights & Activities</button>
+<button class="sb" onclick="showS(this,'c-food')">🍝 Where to Eat</button>
+<button class="sb" onclick="showS(this,'c-tips')">📋 Day Trip Tips</button>
+</nav>
+<div id="c-sights" class="cs active">
+<div class="ib">Capri in July is genuinely crowded — arrive early, head to Anacapri first (quieter, cooler), and save Capri town for late afternoon when day-trippers start leaving.</div>
+<div class="ic"><div class="ii">
+<div class="emi">🚡</div><div class="ib2">
+<div class="it2">
+<div class="nm">Monte Solaro Chairlift — Anacapri</div>
+<div class="bgs">
+<span class="bg bm">Best view on island</span>
+<span class="bg bp">Pregnancy-friendly</span>
+</div>
+</div>
+<div class="lc">📍 Piazza Vittoria, Anacapri · Chairlift 12 min each way</div>
+<div class="dc">At 589 meters, Monte Solaro is the highest point on Capri. The single-seat open chairlift takes 12 minutes to the summit, flying above lemon groves and bougainvillea. From the top you can see the entire Bay of Naples, the Amalfi Coast, and on clear days all the way to Calabria. One of the great views in Italy.</div>
+<div class="tp">💡 Pregnancy note: The chairlift is a single open seat — comfortable in the second trimester. Check current conditions with the operator.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.capriseggiovia.it/" target="_blank">Chairlift Site →</a>
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187783-d246062-Reviews-Seggiovia_Monte_Solaro-Capri_Island_of_Capri_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">~€12 return · Open daily from 9:30am</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🌿</div><div class="ib2">
+<div class="it2">
+<div class="nm">Gardens of Augustus</div>
+<div class="bgs">
+<span class="bg bp">Pregnancy-friendly</span>
+</div>
+</div>
+<div class="lc">📍 Via Matteotti, Capri town</div>
+<div class="dc">Beautifully landscaped botanical gardens with panoramic views over the Faraglioni rocks and Marina Piccola bay. A short walk from the Piazzetta. One of the most photographed viewpoints on the island. Pleasant and not too strenuous. Perfect for afternoon photography as the light improves.</div>
+<div class="tp">💡 Combine with a granita and a walk along Via Tragara for the Faraglioni viewpoint.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187783-d246059-Reviews-Gardens_of_Augustus-Capri_Island_of_Capri_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Entry ~€2 · Open daily from 9am</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🚢</div><div class="ib2">
+<div class="it2">
+<div class="nm">Boat Tour Around the Island</div>
+<div class="bgs">
+<span class="bg bm">Don't skip</span>
+</div>
+</div>
+<div class="lc">📍 Departs Marina Grande · 2 hours</div>
+<div class="dc">A 2-hour group boat tour around Capri is one of the best experiences on the island — the Faraglioni rocks up close, hidden coves and sea caves, dramatic cliffs from the water. Group tours cost around €24 per person. Book in advance in July.</div>
+<div class="tp">💡 Skip the Blue Grotto — requires lying flat in a tiny rowboat, completely unsuitable during pregnancy. The boat tour covers everything else just as beautifully.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.getyourguide.com/capri-island-l4223/boat-tours-tc50/" target="_blank">Book Boat Tour →</a>
+<span class="dt">~€24pp group · 2 hours · Book ahead</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">☕</div><div class="ib2">
+<div class="it2">
+<div class="nm">The Piazzetta — Heart of Capri Town</div>
+<div class="bgs">
+<span class="bg bp">Pregnancy-friendly</span>
+</div>
+</div>
+<div class="lc">📍 Piazza Umberto I · Capri town center</div>
+<div class="dc">A tiny square with enormous personality — cafés, restaurants, clock tower, and one of the best people-watching spots in the world. Celebrities, yachters, and day-trippers all converge here. An espresso at Il Piccolo Bar (oldest bar in the square) costs €5 sitting down — worth it once for the atmosphere.</div>
+<div class="tp">💡 Come early morning to see locals start their day, or late afternoon after day-trippers begin leaving.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Piazzetta+Capri" target="_blank">View on Map →</a>
+<span class="dt">Free to visit · Coffee €5 sitting</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🛍️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Carthusia Perfumery</div>
+<div class="bgs">
+<span class="bg bl">Capri original since 1380</span>
+</div>
+</div>
+<div class="lc">📍 Via Federico Serena, 28 · Capri town</div>
+<div class="dc">Capri's original perfumery, making small-batch scents since 1380 using local ingredients like lemon blossom, rosemary, and wild fig. Staff let you test as many as you like. A bottle of Capri perfume is one of the most distinctive souvenirs you can bring home.</div>
+<div class="tp">💡 Take your time — they'll let you test as many as you like before committing. Reasonably priced for a genuine artisan product.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.carthusia.it/" target="_blank">Official Site →</a>
+<span class="dt">From ~€25 · Several locations on island</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🏖️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Marina Piccola Beach</div>
+<div class="bgs">
+<span class="bg bp">Good swimming</span>
+</div>
+</div>
+<div class="lc">📍 Southern side of the island · Bus from Piazzetta</div>
+<div class="dc">Capri's most charming beach area — a small bay with calm, clear water and views of the Faraglioni rocks. Take the bus from the Piazzetta (10 min) or walk down via Via Mulo. Get there early morning for fewer crowds.</div>
+<div class="tp">💡 Bus from the Piazzetta takes 10 minutes. Walk back up via Via Mulo for great views if you have the energy.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187783-d246064-Reviews-Marina_Piccola-Capri_Island_of_Capri_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Free public area · Beach clubs available</span>
+</div></div>
+</div>
+<div id="c-food" class="cs">
+<div class="ib">Capri is expensive — one of the priciest dining destinations in Italy. Walk slightly off the main tourist drag to find better value. The quality is genuinely high and a meal here with a view is worth the splurge at least once.</div>
+<div class="bx gc"><h4>🍋 What to Eat on Capri</h4><ul class="ul">
+<li><strong>Ravioli capresi</strong> — Capri's local pasta, filled with caciotta cheese and marjoram, served with tomato sauce. The island's signature dish.</li>
+<li><strong>Torta caprese</strong> — a flourless chocolate and almond cake. Every restaurant has it. Order it.</li>
+<li><strong>Insalata caprese</strong> — invented here: buffalo mozzarella, tomatoes, basil, olive oil. A reminder that the best Italian food is always the simplest.</li>
+<li><strong>Limoncello</strong> — Capri's version is excellent. Sip it cold after dinner as a digestivo.</li>
+<li><strong>Granita al limone</strong> — get one at Chiosco Tizzano near the Gardens of Augustus. Extraordinary.</li>
+</ul></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍋</div><div class="ib2">
+<div class="it2">
+<div class="nm">Da Paolino</div>
+<div class="bgs">
+<span class="bg bm">The lemon tree restaurant</span>
+</div>
+</div>
+<div class="lc">📍 Via Palazzo a Mare, 11 · Marina Grande area</div>
+<div class="dc">Dining under a canopy of lemon trees — Capri's most famous and atmospheric restaurant. The entire space is bursting with greenery. Bruschetta, pastas, and desserts are all good. A genuine Capri institution. The lemon pasta is non-negotiable. Book ahead.</div>
+<div class="tp">💡 Book for dinner — the lemon tree setting is magical in the evening candlelight.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187783-d798196-Reviews-Da_Paolino-Capri_Island_of_Capri_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<a class="lk" href="https://www.dapaolino.com/" target="_blank">Book Online →</a>
+<span class="dt">€40–60pp · Book ahead in July</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍕</div><div class="ib2">
+<div class="it2">
+<div class="nm">Lo Sfizio</div>
+<div class="bgs">
+<span class="bg bl">Local favorite</span>
+</div>
+</div>
+<div class="lc">📍 Just outside the main tourist area · Capri town</div>
+<div class="dc">You know it's good when you see locals eating here. Just outside the touristy center — more reasonable prices and genuinely good food. The pasta with razor clams is excellent. Staff often bring complimentary limoncello. The best value full meal on Capri.</div>
+<div class="tp">💡 Order the local Falanghina wine — you may struggle to find this particular one once off the island.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187783-d2093156-Reviews-Lo_Sfizio-Capri_Island_of_Capri_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€25–40pp · Good value for Capri</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍕</div><div class="ib2">
+<div class="it2">
+<div class="nm">Ristorante Aurora</div>
+<div class="bgs">
+<span class="bg bl">Capri institution</span>
+</div>
+</div>
+<div class="lc">📍 Via Fuorlovado, 18 · Capri town</div>
+<div class="dc">A Capri classic with timeless charm — favored by both locals and visitors. Known for excellent handmade pasta and their famous pizza all'acqua (a lighter, crisp version unique to Capri). The ravioli capresi here are considered among the best on the island. Book ahead for dinner.</div>
+<div class="tp">💡 The pizza all'acqua is worth ordering — it's unlike any pizza you've had before.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187783-d798197-Reviews-Ristorante_Aurora-Capri_Island_of_Capri_Province_of_Naples_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€35–55pp · Book ahead</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍦</div><div class="ib2">
+<div class="it2">
+<div class="nm">Gelateria Buonocore</div>
+<div class="bgs">
+<span class="bg bm">Best gelato on Capri</span>
+</div>
+</div>
+<div class="lc">📍 Via Vittorio Emanuele, 35 · Capri town</div>
+<div class="dc">Consistently called the best gelato on Capri, also known for cookies and cannoli. The lemon gelato made with Capri lemons is exceptional — brighter and more fragrant than anything you'll find elsewhere. Stop here before or after the Gardens of Augustus.</div>
+<div class="tp">💡 The lemon gelato + a cannolo = the perfect Capri afternoon snack. €3–5.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Gelateria+Buonocore+Capri" target="_blank">Directions →</a>
+<span class="dt">€3–5 · Central location</span>
+</div></div>
+</div>
+<div id="c-tips" class="cs">
+<div class="bx gc"><h4>⛵ Ferry from Sorrento — What to Know</h4><ul class="ul">
+<li><strong>Crossing time:</strong> Only 25 minutes — the shortest from any base on the coast</li>
+<li><strong>Departure:</strong> Marina Piccola, Sorrento (use the lift from town)</li>
+<li><strong>Book in advance:</strong> July ferries fill up — book via <a href="https://www.ferryhopper.com" target="_blank" style="color:var(--go)">Ferryhopper.com</a> or at the port the day before</li>
+<li><strong>Arrive by 9:30am</strong> to get the best of the island before midday crowds peak</li>
+<li><strong>Funicular:</strong> From Marina Grande up to Capri town costs ~€2 and takes 5 minutes — always use this rather than the steep walk up</li>
+<li><strong>Return:</strong> Last ferries back to Sorrento typically around 6–7pm — don't miss them</li>
+</ul></div>
+<div class="bx bc"><h4>🗺 Suggested Day Flow</h4><ul class="ul">
+<li><strong>9:00am</strong> — Ferry from Sorrento, arrive Marina Grande ~9:25am</li>
+<li><strong>9:30am</strong> — Bus to Anacapri (quieter, cooler) — explore the town for 30 min</li>
+<li><strong>10:00am</strong> — Monte Solaro chairlift — 12 min up, panoramic views, 12 min down</li>
+<li><strong>11:30am</strong> — Bus to Capri town · boat tour from Marina Grande (book in advance)</li>
+<li><strong>1:00pm</strong> — Lunch at Lo Sfizio or Aurora</li>
+<li><strong>2:30pm</strong> — Stroll Via Tragara to Faraglioni viewpoint · swim at Marina Piccola</li>
+<li><strong>4:30pm</strong> — Gelato at Buonocore · browse shops and Piazzetta</li>
+<li><strong>6:00pm</strong> — Ferry back to Sorrento</li>
+</ul></div>
+<div class="bx pc"><h4>🤰 Capri for a Pregnant Traveler</h4><ul class="ul">
+<li><strong>Skip:</strong> The Blue Grotto — requires lying flat in a tiny rowboat. Not suitable during pregnancy.</li>
+<li><strong>Perfect:</strong> Monte Solaro chairlift (sitting, breezy), Gardens of Augustus (flat, shaded), Piazzetta</li>
+<li><strong>Good swimming:</strong> Marina Piccola — calm water, accessible by bus</li>
+<li><strong>Heat:</strong> July Capri is intense — midday heat is extreme. Plan rest or shade between 12–3pm.</li>
+<li><strong>Steps:</strong> Capri town involves lots of steps. Use the funicular (€2) for the Marina Grande to town climb.</li>
+</ul></div>
+</div>
+</div>
+<div id="dp-pos" class="dp PO">
+<div class="ph"><div class="pe">July 7 · Full Day from Sorrento + Ravello & Amalfi</div>
+<h1 class="pt">Positano, <em>Ravello &amp; the Coast</em></h1>
+<p class="ps">The most beautiful stretch of coastline in Italy. Positano for beaches and atmosphere, Ravello for views and gardens, Amalfi town as a historic stop. This is your full Amalfi Coast day from Sorrento.</p></div>
+<nav class="snav">
+<button class="sb active" onclick="showS(this,'pos-positano')">🌊 Positano</button>
+<button class="sb" onclick="showS(this,'pos-ravello')">🏔️ Ravello</button>
+<button class="sb" onclick="showS(this,'pos-amalfi')">⛪ Amalfi Town</button>
+<button class="sb" onclick="showS(this,'pos-food')">🍝 Food & Drink</button>
+<button class="sb" onclick="showS(this,'pos-tips')">📋 Getting Around</button>
+</nav>
+<div id="pos-positano" class="cs active">
+<div class="ib">Positano is the postcard. Pastel houses cascading down the cliff to a small pebble beach. Pre-book your beach club sunbeds — Spiaggia Grande gets very crowded in July.</div>
+<div class="ic"><div class="ii">
+<div class="emi">🏖️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Spiaggia Grande — The Main Beach</div>
+<div class="bgs">
+<span class="bg bm">The Positano experience</span>
+</div>
+</div>
+<div class="lc">📍 Base of the village · Ferry arrives here</div>
+<div class="dc">Positano's main beach — pebbles, clear water, and the famous pastel buildings rising above on all sides. The view looking back at the village from the water is the one on every postcard. Pre-book sunbeds at a beach club for July — Lido Blu and La Scogliera are well-reviewed. Morning swim, then lunch, then wander the village in the afternoon.</div>
+<div class="tp">💡 Pre-book beach club sunbeds — essential in July. Book 1–2 weeks ahead.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187789-d2349553-Reviews-Spiaggia_Grande-Positano_Province_of_Salerno_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Sunbeds €20–30pp · Book ahead for July</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🏖️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Fornillo Beach</div>
+<div class="bgs">
+<span class="bg bl">Quieter alternative</span>
+</div>
+</div>
+<div class="lc">📍 5-min walk west of Spiaggia Grande</div>
+<div class="dc">Positano's quieter, less touristy beach. Smaller, more peaceful, with a lovely neighborhood feel. Restaurants here (like Lo Guarracino) consistently offer better value than those on the main beach. A good choice for an afternoon swim after lunch.</div>
+<div class="tp">💡 Combine with lunch at Lo Guarracino which overlooks the beach — excellent seafood pasta and a sea breeze.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g187789-d2116869-Reviews-Fornillo_Beach-Positano_Province_of_Salerno_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Free public beach · 5-min walk from Spiaggia Grande</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">👗</div><div class="ib2">
+<div class="it2">
+<div class="nm">Village Wander & Shopping</div>
+<div class="bgs">
+<span class="bg bp">Take your time</span>
+</div>
+</div>
+<div class="lc">📍 Via Pasitea & the village lanes</div>
+<div class="dc">Positano is famous for handmade linen and silk clothing, handmade sandals, and ceramics. Via Pasitea is the main winding street lined with boutiques. The switchback streets going up the hill are quieter with local shops. Golden light on the buildings in late afternoon is extraordinary.</div>
+<div class="tp">💡 Late afternoon (5–7pm) is the magic hour — the light on the pastel buildings is extraordinary and crowds have thinned.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Positano+village" target="_blank">View on Map →</a>
+<span class="dt">Free · Best in early morning or late afternoon</span>
+</div></div>
+</div>
+<div id="pos-ravello" class="cs">
+<div class="ib">Ravello sits 350 meters above the sea on a cliff — a medieval hilltop town that feels a world away from the coastal bustle. The views from here are arguably the most beautiful on the entire Amalfi Coast. Reachable by bus or taxi from Amalfi town.</div>
+<div class="ic"><div class="ii">
+<div class="emi">🌸</div><div class="ib2">
+<div class="it2">
+<div class="nm">Villa Cimbrone — Terrace of Infinity</div>
+<div class="bgs">
+<span class="bg bm">Most beautiful view on coast</span>
+</div>
+</div>
+<div class="lc">📍 Via Santa Chiara, 26 · Ravello</div>
+<div class="dc">A historic 12th-century residence with gardens and terraces overlooking the Mediterranean. The Terrace of Infinity — a row of classical busts along a clifftop balcony — offers what many consider the single most beautiful panoramic view in all of southern Italy. The gardens are worth spending hours in.</div>
+<div class="tp">💡 Go early — by 10am day-trippers arrive in numbers. The gardens are worth at least 1.5–2 hours.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.hotelvillacimbrone.com/gardens/" target="_blank">Garden Info →</a>
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g194862-d212476-Reviews-Villa_Cimbrone-Ravello_Province_of_Salerno_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Entry €8 · Daily 9am to dusk</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🏛️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Villa Rufolo</div>
+<div class="bgs">
+<span class="bg bm">Wagner's inspiration</span>
+</div>
+</div>
+<div class="lc">📍 Piazza Duomo · Ravello</div>
+<div class="dc">The other great Ravello garden — an 11th-century villa whose terraced gardens famously inspired composer Wagner to write his opera Parsifal in 1880. The annual Ravello Festival uses these gardens as an open-air concert hall in summer. Panoramic views over the Bay of Salerno.</div>
+<div class="tp">💡 The Ravello Festival runs in July — check if there's an outdoor concert during your visit. www.ravellofestival.com</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.villarufolo.it/" target="_blank">Official Site →</a>
+<span class="dt">Entry €7 · Daily 9am–dusk</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🧭</div><div class="ib2">
+<div class="it2">
+<div class="nm">Ravello Village Wander</div>
+<div class="bgs">
+<span class="bg bf">Free</span>
+<span class="bg bp">Pregnancy-friendly</span>
+</div>
+</div>
+<div class="lc">📍 The whole hilltop town</div>
+<div class="dc">Ravello rewards slow, aimless wandering. The main piazza with 180-degree vineyard views, the maze of alleys with locally-owned stores, clifftop viewpoints appearing unexpectedly around corners. Far less crowded than Positano or Amalfi — genuinely peaceful in the morning.</div>
+<div class="tp">💡 The best of Ravello is free — just walk slowly and look at everything. It's a small town but endlessly rewarding.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://maps.google.com/?q=Ravello+Italy" target="_blank">View on Map →</a>
+<span class="dt">Free · Best in morning · Very walkable</span>
+</div></div>
+</div>
+<div id="pos-amalfi" class="cs">
+<div class="ib">Amalfi town is worth 2–3 hours as a stop — a beautiful cathedral, a lively harbor, and interesting history as a former maritime republic. Use it as a stop between Positano (ferry) and Ravello (bus up the hill).</div>
+<div class="ic"><div class="ii">
+<div class="emi">⛪</div><div class="ib2">
+<div class="it2">
+<div class="nm">Duomo di Sant'Andrea</div>
+<div class="bgs">
+<span class="bg bm">Amalfi's centerpiece</span>
+</div>
+</div>
+<div class="lc">📍 Piazza del Duomo · Central Amalfi</div>
+<div class="dc">A magnificent Arab-Norman cathedral with a striking striped facade and grand staircase. The architectural soul of Amalfi town. The interior is ornate and atmospheric. The Bell Tower and adjacent Chiostro del Paradiso (Paradise Cloister) are worth the entry fee.</div>
+<div class="tp">💡 The piazza in front is always lively — good for people-watching over a gelato before heading up to Ravello.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Attraction_Review-g194846-d213065-Reviews-Duomo_di_Amalfi_Cattedrale_di_Sant_Andrea-Amalfi_Province_of_Salerno_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">Cathedral free · Cloister €3 · Daily 9am–7pm</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">📄</div><div class="ib2">
+<div class="it2">
+<div class="nm">Museo della Carta — Paper Museum</div>
+<div class="bgs">
+<span class="bg bl">Unexpected gem</span>
+</div>
+</div>
+<div class="lc">📍 Via delle Cartiere, 23</div>
+<div class="dc">Amalfi had one of Italy's most important paper-making industries dating to the 12th century. The museum in a working paper mill shows how paper was made in medieval times. Surprisingly fascinating. Small, cool inside, takes about 45 minutes — great midday stop.</div>
+<div class="tp">💡 A great midday stop — it's indoors, cool, and genuinely interesting. Kids and adults both enjoy it.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.museodellacarta.it/" target="_blank">Official Site →</a>
+<span class="dt">Entry €6 · Tue–Sun 10am–6:30pm</span>
+</div></div>
+</div>
+<div id="pos-food" class="cs">
+<div class="ib">The Amalfi Coast's cuisine centers on the freshest seafood, lemon-based everything, and the best pasta of your life. Book all restaurants in advance for July — Positano in particular has very few good tables and a very large number of visitors.</div>
+<div class="bx gc"><h4>🍋 Amalfi Coast Signature Dishes</h4><ul class="ul">
+<li><strong>Scialatielli ai frutti di mare</strong> — thick hand-rolled pasta with mixed seafood. The Amalfi Coast's most iconic pasta.</li>
+<li><strong>Spaghetti alla Nerano</strong> — spaghetti with fried zucchini and provolone cheese, invented in nearby Nerano. On every menu.</li>
+<li><strong>Delizia al limone</strong> — the coast's signature dessert: soft sponge soaked in lemon cream. Order it everywhere.</li>
+<li><strong>Paccheri all'astice</strong> — large pasta tubes with lobster sauce. Expensive but extraordinary.</li>
+<li><strong>Colatura di alici</strong> — Cetara's fermented anchovy condiment. Intensely good on pasta.</li>
+</ul></div>
+<div class="cl"><span class="ct">🌊 Positano Restaurants</span><div class="cln"></div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🍝</div><div class="ib2">
+<div class="it2">
+<div class="nm">Da Vincenzo</div>
+<div class="bgs">
+<span class="bg bm">Local institution</span>
+<span class="bg bb">Book 2+ weeks ahead</span>
+</div>
+</div>
+<div class="lc">📍 Via Pasitea · Upper Positano</div>
+<div class="dc">The restaurant locals recommend above all others in Positano — warm, bustling, and proudly old-school. Fresh seafood, handmade pastas, simple confident flavors. The scialatielli with clams is a standout. Family-run with regulars returning for twenty years.</div>
+<div class="tp">💡 Book 2+ weeks ahead for July. The restaurant is a short climb above the beach — worth it.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187789-d784219-Reviews-Da_Vincenzo-Positano_Province_of_Salerno_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€35–55pp · Book 2+ weeks ahead</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🌊</div><div class="ib2">
+<div class="it2">
+<div class="nm">Lo Guarracino</div>
+<div class="bgs">
+<span class="bg bl">Best for lunch</span>
+</div>
+</div>
+<div class="lc">📍 Via Positanesi d'America, 12 · Above Fornillo Beach</div>
+<div class="dc">A sea-breeze, seafood-pasta restaurant above Fornillo beach. One of the most relaxed places to eat in Positano. Excellent scialatielli ai frutti di mare, fresh grilled fish, and the kind of long lunch you'll want to linger over. Slightly better value than restaurants on the main beach.</div>
+<div class="tp">💡 Book for lunch and combine with an afternoon swim at Fornillo right below. Perfect day plan.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187789-d784211-Reviews-Lo_Guarracino-Positano_Province_of_Salerno_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€30–45pp · Book ahead</span>
+</div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🏖️</div><div class="ib2">
+<div class="it2">
+<div class="nm">Da Adolfo</div>
+<div class="bgs">
+<span class="bg bl">Beach lunch experience</span>
+</div>
+</div>
+<div class="lc">📍 Laurito Beach · Free boat shuttle from main beach</div>
+<div class="dc">A famous seafood restaurant on a private beach cove accessible only by free boat shuttle from the main Positano marina. Fresh seafood, mozzarella grilled in lemon leaves, and a setting that feels genuinely special. Book reservations in advance.</div>
+<div class="tp">💡 The boat shuttle is free with a reservation. Book early — this fills up fast in July.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g187789-d784215-Reviews-Da_Adolfo-Positano_Province_of_Salerno_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€30–45pp · Book ahead · Free boat shuttle</span>
+</div></div>
+<div class="cl"><span class="ct">🏔️ Ravello Restaurants</span><div class="cln"></div></div>
+<div class="ic"><div class="ii">
+<div class="emi">🌿</div><div class="ib2">
+<div class="it2">
+<div class="nm">Ristorante Cumpa' Cosimo</div>
+<div class="bgs">
+<span class="bg bl">Ravello classic</span>
+</div>
+</div>
+<div class="lc">📍 Via Roma, 44 · Ravello</div>
+<div class="dc">A family-run Ravello institution — the kind of place locals have been eating at for generations. Traditional Campanian cooking, generous portions, no pretense. The house pasta is made fresh daily. Very reasonable prices for a town this beautiful.</div>
+<div class="tp">💡 One of the most affordable good restaurants in Ravello. No need to book for lunch — walk in.</div>
+</div></div>
+<div class="ifoot">
+<a class="lk" href="https://www.tripadvisor.com/Restaurant_Review-g194862-d1001649-Reviews-Ristorante_Cumpa_Cosimo-Ravello_Province_of_Salerno_Campania.html" target="_blank">Reviews →</a>
+<span class="dt">€20–30pp · Lunch · Walk-in fine</span>
+</div></div>
+</div>
+<div id="pos-tips" class="cs">
+<div class="bx gc"><h4>🚢 Getting Around the Coast from Sorrento</h4><ul class="ul">
+<li><strong>Sorrento → Positano ferry:</strong> 35–40 min · Calm morning sea · Book in advance</li>
+<li><strong>Positano → Amalfi ferry:</strong> 30 min · Multiple daily departures · Scenic coastal route</li>
+<li><strong>Amalfi → Ravello:</strong> SITA bus (20–30 min, €1.50) or taxi (€15–20) up the mountain</li>
+<li><strong>COSTIERASITA 24-hr ticket:</strong> €10 from any tabacchi — unlimited bus travel between all Amalfi Coast towns</li>
+<li><strong>Warning:</strong> July SITA buses are extremely crowded. Ferries are always the better option between coastal towns.</li>
+<li><strong>Taxi tips:</strong> Negotiate fare before getting in. Positano to Amalfi ~€60–80. Amalfi to Ravello ~€15.</li>
+</ul></div>
+<div class="bx pc"><h4>🤰 Amalfi Coast Notes for a Pregnant Traveler</h4><ul class="ul">
+<li><strong>Positano stairs:</strong> The town is essentially all stairs. Take them slowly, wear flat sandals with grip.</li>
+<li><strong>Avoid the bus:</strong> The winding Amalfi Drive by bus is famously motion-sickness-inducing. Ferries between towns are much gentler.</li>
+<li><strong>Beach clubs:</strong> Pre-booking sunbeds means you arrive to shade and a lounger — no carrying things down stairs in the heat.</li>
+<li><strong>Ravello is easier:</strong> More flat than Positano, genuinely peaceful, with shaded garden paths.</li>
+<li><strong>Hydration:</strong> Carry water everywhere. The July heat on the coast is extreme — 35°C+ is common.</li>
+<li><strong>Morning priority:</strong> Do active things before noon. Rest in shade or at the beach midday.</li>
+</ul></div>
+</div>
+</div>
+
+</div>
+
+<script>
+function showPage(pid, tab) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.site-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(pid + '-page').classList.add('active');
+  if (tab) tab.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function goGuide(destId, tabId) {
+  // Switch to guide page
+  showPage('guide', document.querySelectorAll('.site-tab')[1]);
+  // Show correct destination
+  const dpMap = {n:'dp-n', p:'dp-p', s:'dp-s', c:'dp-c', pos:'dp-pos'};
+  const clsMap = {n:'na', p:'pr', s:'so', c:'ca', pos:'po'};
+  document.querySelectorAll('.dp').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.db').forEach(b => b.classList.remove('active','na','pr','so','ca','po'));
+  const dp = document.getElementById(dpMap[destId]);
+  if (dp) dp.classList.add('active');
+  // activate the right dest button
+  const dbs = document.querySelectorAll('.db');
+  const order = ['n','p','s','c','pos'];
+  const idx = order.indexOf(destId);
+  if (dbs[idx]) dbs[idx].classList.add('active', clsMap[destId]);
+  // If a specific sub-tab was requested
+  if (tabId) {
+    setTimeout(() => {
+      const panel = document.getElementById(dpMap[destId]);
+      if (!panel) return;
+      panel.querySelectorAll('.cs').forEach(s => s.classList.remove('active'));
+      panel.querySelectorAll('.sb').forEach(b => b.classList.remove('active'));
+      const target = document.getElementById(tabId);
+      if (target) target.classList.add('active');
+      // find matching sub-btn
+      panel.querySelectorAll('.sb').forEach(b => {
+        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) b.classList.add('active');
+      });
+    }, 50);
+  }
+}
+
+function showD(pid, btn, cls) {
+  document.querySelectorAll('.dp').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.db').forEach(b => b.classList.remove('active','na','pr','so','ca','po'));
+  document.getElementById('dp-'+pid).classList.add('active');
+  btn.classList.add('active', cls);
+}
+function showS(btn, tid) {
+  const panel = btn.closest('.dp');
+  panel.querySelectorAll('.cs').forEach(s => s.classList.remove('active'));
+  panel.querySelectorAll('.sb').forEach(b => b.classList.remove('active'));
+  document.getElementById(tid).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
 </body>
 </html>
